@@ -10,6 +10,7 @@ namespace BTPNS.Scheduler
     {
         static void Main(string[] args)
         {
+            //here we gooo
         }
     }
 }
