@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,46 +12,92 @@ namespace BTPNS.Scheduler
 {
     public class RDLCHelper
     {
-         public string GeneratePDF(string RDLC, string OutputFileName)
-         {  
-            // select appropriate contenttype, while binary transfer it identifies filetype  
-             string contentType = string.Empty;
-            contentType = "application/pdf";
-             //if (ddlFileFormat.SelectedValue.Equals(".pdf"))  
-             //    contentType = "application/pdf";  
-             //if (ddlFileFormat.SelectedValue.Equals(".doc"))  
-             //    contentType = "application/ms-word";  
-             //if (ddlFileFormat.SelectedValue.Equals(".xls"))  
-             //    contentType = "application/xls";  
-   
-             DataTable dsData = new DataTable();  
-             dsData = getReportData();  
-   
-             string FileName = OutputFileName;  
-             string extension;  
-             string encoding;  
-             string mimeType;  
-             string[] streams;  
-             Warning[] warnings;  
-   
-             LocalReport report = new LocalReport();  
-             report.ReportPath = Path.Combine(Environment.CurrentDirectory, "RDLC") + "/" + RDLC;
-            ReportDataSource rds = new ReportDataSource();  
-             rds.Name = "DataSet1";//This refers to the dataset name in the RDLC file  
-             rds.Value = dsData;  
-             report.DataSources.Add(rds);  
-   
-             Byte[] mybytes = report.Render("PDF", null,
-                    out extension, out encoding,
-                    out mimeType, out streams, out warnings); //for exporting to PDF  
-            string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + FileName;
+        DataBaseManager db = new DataBaseManager();
+        SqlConnection sqlConn = new SqlConnection();
+        SqlDataReader reader = null;
+         public string GenerateAP3RPDF(string RDLC, string OutputFileName, string NomorAkad)
+         {
+            try
+            {
+                DataTable dt = new DataTable();
+                DataTable barang1 = new DataTable();
+                DataTable barang2 = new DataTable();
 
-             using (FileStream fs = File.Create(file_output_url))  
-             {  
-                 fs.Write(mybytes, 0, mybytes.Length);  
-             }
+                db.OpenConnection(ref sqlConn);
+                db.cmd.CommandText = "usp_GeneratePDF_Ap3R";
+                db.cmd.CommandType = CommandType.StoredProcedure;
+                db.cmd.Parameters.Clear();
+                db.AddInParameter(db.cmd, "NomorAkad", NomorAkad);
+                reader = db.cmd.ExecuteReader();
+                dt.Load(reader);
+                db.CloseDataReader(reader);
 
-            return file_output_url;
+                db.cmd.CommandText = "usp_GeneratePDF_AP3R_BarangYangDibiayai1";
+                db.cmd.CommandType = CommandType.StoredProcedure;
+                db.cmd.Parameters.Clear();
+                db.AddInParameter(db.cmd, "NomorAkad", NomorAkad);
+                reader = db.cmd.ExecuteReader();
+                barang1.Load(reader);
+                db.CloseDataReader(reader);
+
+                db.cmd.CommandText = "usp_GeneratePDF_AP3R_BarangYangDibiayai2";
+                db.cmd.CommandType = CommandType.StoredProcedure;
+                db.cmd.Parameters.Clear();
+                db.AddInParameter(db.cmd, "NomorAkad", NomorAkad);
+                reader = db.cmd.ExecuteReader();
+                barang2.Load(reader);
+                db.CloseDataReader(reader);
+
+
+                db.CloseConnection(ref sqlConn);
+
+
+                string contentType = string.Empty;
+                contentType = "application/pdf";
+
+                string FileName = OutputFileName;
+                string extension;
+                string encoding;
+                string mimeType;
+                string[] streams;
+                Warning[] warnings;
+
+                LocalReport report = new LocalReport();
+                report.ReportPath = Path.Combine(Environment.CurrentDirectory, "RDLC") + "\\" + RDLC;
+                ReportDataSource rds = new ReportDataSource();
+                rds.Name = "APER_DataSet";//This refers to the dataset name in the RDLC file  
+                rds.Value = dt;
+                report.DataSources.Add(rds);
+
+                rds = new ReportDataSource();
+                rds.Name = "Barang1_DataSet";
+                rds.Value = barang1;
+
+                report.DataSources.Add(rds);
+
+                rds = new ReportDataSource();
+                rds.Name = "Barang2_DataSet";
+                rds.Value = barang2;
+
+                report.DataSources.Add(rds);
+
+
+                Byte[] mybytes = report.Render("PDF", null,
+                        out extension, out encoding,
+                        out mimeType, out streams, out warnings); //for exporting to PDF  
+                string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + "\\" + FileName + ".pdf";
+
+                using (FileStream fs = File.Create(file_output_url))
+                {
+                    fs.Write(mybytes, 0, mybytes.Length);
+                }
+                return file_output_url;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+ 
         }  
 
     }
