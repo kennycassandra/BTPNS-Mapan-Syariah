@@ -30,6 +30,8 @@ namespace BTPNS.Scheduler {
         
         private BarangYangDibiayai2DataTable tableBarangYangDibiayai2;
         
+        private PersetujuanPembiayaanDataTable tablePersetujuanPembiayaan;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -66,6 +68,9 @@ namespace BTPNS.Scheduler {
                 }
                 if ((ds.Tables["BarangYangDibiayai2"] != null)) {
                     base.Tables.Add(new BarangYangDibiayai2DataTable(ds.Tables["BarangYangDibiayai2"]));
+                }
+                if ((ds.Tables["PersetujuanPembiayaan"] != null)) {
+                    base.Tables.Add(new PersetujuanPembiayaanDataTable(ds.Tables["PersetujuanPembiayaan"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -112,6 +117,16 @@ namespace BTPNS.Scheduler {
         public BarangYangDibiayai2DataTable BarangYangDibiayai2 {
             get {
                 return this.tableBarangYangDibiayai2;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public PersetujuanPembiayaanDataTable PersetujuanPembiayaan {
+            get {
+                return this.tablePersetujuanPembiayaan;
             }
         }
         
@@ -191,6 +206,9 @@ namespace BTPNS.Scheduler {
                 if ((ds.Tables["BarangYangDibiayai2"] != null)) {
                     base.Tables.Add(new BarangYangDibiayai2DataTable(ds.Tables["BarangYangDibiayai2"]));
                 }
+                if ((ds.Tables["PersetujuanPembiayaan"] != null)) {
+                    base.Tables.Add(new PersetujuanPembiayaanDataTable(ds.Tables["PersetujuanPembiayaan"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -242,6 +260,12 @@ namespace BTPNS.Scheduler {
                     this.tableBarangYangDibiayai2.InitVars();
                 }
             }
+            this.tablePersetujuanPembiayaan = ((PersetujuanPembiayaanDataTable)(base.Tables["PersetujuanPembiayaan"]));
+            if ((initTable == true)) {
+                if ((this.tablePersetujuanPembiayaan != null)) {
+                    this.tablePersetujuanPembiayaan.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -258,6 +282,8 @@ namespace BTPNS.Scheduler {
             base.Tables.Add(this.tableBarangYangDibiayai1);
             this.tableBarangYangDibiayai2 = new BarangYangDibiayai2DataTable();
             base.Tables.Add(this.tableBarangYangDibiayai2);
+            this.tablePersetujuanPembiayaan = new PersetujuanPembiayaanDataTable();
+            base.Tables.Add(this.tablePersetujuanPembiayaan);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -275,6 +301,12 @@ namespace BTPNS.Scheduler {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeBarangYangDibiayai2() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializePersetujuanPembiayaan() {
             return false;
         }
         
@@ -341,6 +373,9 @@ namespace BTPNS.Scheduler {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void BarangYangDibiayai2RowChangeEventHandler(object sender, BarangYangDibiayai2RowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void PersetujuanPembiayaanRowChangeEventHandler(object sender, PersetujuanPembiayaanRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1910,6 +1945,734 @@ namespace BTPNS.Scheduler {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "BarangYangDibiayai2DataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class PersetujuanPembiayaanDataTable : global::System.Data.TypedTableBase<PersetujuanPembiayaanRow> {
+            
+            private global::System.Data.DataColumn columnOfficerName;
+            
+            private global::System.Data.DataColumn columnNamaNasabah;
+            
+            private global::System.Data.DataColumn columnBergabungSelama;
+            
+            private global::System.Data.DataColumn columnProdukPembiayaanRekomendasi;
+            
+            private global::System.Data.DataColumn columnPlafonRekomendasi;
+            
+            private global::System.Data.DataColumn columnTenorRekomendasi;
+            
+            private global::System.Data.DataColumn columnMargin;
+            
+            private global::System.Data.DataColumn columnSaldoTabunganSaatIni;
+            
+            private global::System.Data.DataColumn columnLimitPembiayaanTotal;
+            
+            private global::System.Data.DataColumn columnLimitTersisa;
+            
+            private global::System.Data.DataColumn columnLimitTerpakai;
+            
+            private global::System.Data.DataColumn columnPlafonTerakhir;
+            
+            private global::System.Data.DataColumn columnTenorTerakhir;
+            
+            private global::System.Data.DataColumn columnProdukTerakhir;
+            
+            private global::System.Data.DataColumn columnOutstandingTerakhir;
+            
+            private global::System.Data.DataColumn columnAngsuranTerakhir;
+            
+            private global::System.Data.DataColumn columnGradeTerakhir;
+            
+            private global::System.Data.DataColumn columnTotalPendapatanPenjualan;
+            
+            private global::System.Data.DataColumn columnTotalPembelian;
+            
+            private global::System.Data.DataColumn columnPengeluaranUsaha;
+            
+            private global::System.Data.DataColumn columnPendapatanBersihUsaha;
+            
+            private global::System.Data.DataColumn columnPendapatanLain;
+            
+            private global::System.Data.DataColumn columnPengeluaranNonUsaha;
+            
+            private global::System.Data.DataColumn columnSisaPenghasilan;
+            
+            private global::System.Data.DataColumn columnIIR;
+            
+            private global::System.Data.DataColumn columnIIRNominal;
+            
+            private global::System.Data.DataColumn columnAngsuranPerBulanRekomendasi;
+            
+            private global::System.Data.DataColumn columnMMS;
+            
+            private global::System.Data.DataColumn columnBidangUsahaSaatIni;
+            
+            private global::System.Data.DataColumn columnDeskripsiUsahaSaatIni;
+            
+            private global::System.Data.DataColumn columnWaktuOperasional;
+            
+            private global::System.Data.DataColumn columnStatusMilikTempatUsaha;
+            
+            private global::System.Data.DataColumn columnLamaUsaha;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PersetujuanPembiayaanDataTable() {
+                this.TableName = "PersetujuanPembiayaan";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal PersetujuanPembiayaanDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected PersetujuanPembiayaanDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OfficerNameColumn {
+                get {
+                    return this.columnOfficerName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NamaNasabahColumn {
+                get {
+                    return this.columnNamaNasabah;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BergabungSelamaColumn {
+                get {
+                    return this.columnBergabungSelama;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProdukPembiayaanRekomendasiColumn {
+                get {
+                    return this.columnProdukPembiayaanRekomendasi;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PlafonRekomendasiColumn {
+                get {
+                    return this.columnPlafonRekomendasi;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TenorRekomendasiColumn {
+                get {
+                    return this.columnTenorRekomendasi;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MarginColumn {
+                get {
+                    return this.columnMargin;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SaldoTabunganSaatIniColumn {
+                get {
+                    return this.columnSaldoTabunganSaatIni;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LimitPembiayaanTotalColumn {
+                get {
+                    return this.columnLimitPembiayaanTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LimitTersisaColumn {
+                get {
+                    return this.columnLimitTersisa;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LimitTerpakaiColumn {
+                get {
+                    return this.columnLimitTerpakai;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PlafonTerakhirColumn {
+                get {
+                    return this.columnPlafonTerakhir;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TenorTerakhirColumn {
+                get {
+                    return this.columnTenorTerakhir;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProdukTerakhirColumn {
+                get {
+                    return this.columnProdukTerakhir;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OutstandingTerakhirColumn {
+                get {
+                    return this.columnOutstandingTerakhir;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AngsuranTerakhirColumn {
+                get {
+                    return this.columnAngsuranTerakhir;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn GradeTerakhirColumn {
+                get {
+                    return this.columnGradeTerakhir;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TotalPendapatanPenjualanColumn {
+                get {
+                    return this.columnTotalPendapatanPenjualan;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TotalPembelianColumn {
+                get {
+                    return this.columnTotalPembelian;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PengeluaranUsahaColumn {
+                get {
+                    return this.columnPengeluaranUsaha;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PendapatanBersihUsahaColumn {
+                get {
+                    return this.columnPendapatanBersihUsaha;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PendapatanLainColumn {
+                get {
+                    return this.columnPendapatanLain;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PengeluaranNonUsahaColumn {
+                get {
+                    return this.columnPengeluaranNonUsaha;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SisaPenghasilanColumn {
+                get {
+                    return this.columnSisaPenghasilan;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IIRColumn {
+                get {
+                    return this.columnIIR;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IIRNominalColumn {
+                get {
+                    return this.columnIIRNominal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AngsuranPerBulanRekomendasiColumn {
+                get {
+                    return this.columnAngsuranPerBulanRekomendasi;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MMSColumn {
+                get {
+                    return this.columnMMS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BidangUsahaSaatIniColumn {
+                get {
+                    return this.columnBidangUsahaSaatIni;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DeskripsiUsahaSaatIniColumn {
+                get {
+                    return this.columnDeskripsiUsahaSaatIni;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn WaktuOperasionalColumn {
+                get {
+                    return this.columnWaktuOperasional;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn StatusMilikTempatUsahaColumn {
+                get {
+                    return this.columnStatusMilikTempatUsaha;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LamaUsahaColumn {
+                get {
+                    return this.columnLamaUsaha;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PersetujuanPembiayaanRow this[int index] {
+                get {
+                    return ((PersetujuanPembiayaanRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event PersetujuanPembiayaanRowChangeEventHandler PersetujuanPembiayaanRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event PersetujuanPembiayaanRowChangeEventHandler PersetujuanPembiayaanRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event PersetujuanPembiayaanRowChangeEventHandler PersetujuanPembiayaanRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event PersetujuanPembiayaanRowChangeEventHandler PersetujuanPembiayaanRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddPersetujuanPembiayaanRow(PersetujuanPembiayaanRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PersetujuanPembiayaanRow AddPersetujuanPembiayaanRow(
+                        string OfficerName, 
+                        string NamaNasabah, 
+                        string BergabungSelama, 
+                        string ProdukPembiayaanRekomendasi, 
+                        decimal PlafonRekomendasi, 
+                        int TenorRekomendasi, 
+                        string Margin, 
+                        decimal SaldoTabunganSaatIni, 
+                        decimal LimitPembiayaanTotal, 
+                        decimal LimitTersisa, 
+                        decimal LimitTerpakai, 
+                        decimal PlafonTerakhir, 
+                        string TenorTerakhir, 
+                        string ProdukTerakhir, 
+                        decimal OutstandingTerakhir, 
+                        decimal AngsuranTerakhir, 
+                        string GradeTerakhir, 
+                        decimal TotalPendapatanPenjualan, 
+                        decimal TotalPembelian, 
+                        decimal PengeluaranUsaha, 
+                        decimal PendapatanBersihUsaha, 
+                        decimal PendapatanLain, 
+                        decimal PengeluaranNonUsaha, 
+                        decimal SisaPenghasilan, 
+                        decimal IIR, 
+                        decimal IIRNominal, 
+                        decimal AngsuranPerBulanRekomendasi, 
+                        string MMS, 
+                        string BidangUsahaSaatIni, 
+                        string DeskripsiUsahaSaatIni, 
+                        string WaktuOperasional, 
+                        string StatusMilikTempatUsaha, 
+                        int LamaUsaha) {
+                PersetujuanPembiayaanRow rowPersetujuanPembiayaanRow = ((PersetujuanPembiayaanRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        OfficerName,
+                        NamaNasabah,
+                        BergabungSelama,
+                        ProdukPembiayaanRekomendasi,
+                        PlafonRekomendasi,
+                        TenorRekomendasi,
+                        Margin,
+                        SaldoTabunganSaatIni,
+                        LimitPembiayaanTotal,
+                        LimitTersisa,
+                        LimitTerpakai,
+                        PlafonTerakhir,
+                        TenorTerakhir,
+                        ProdukTerakhir,
+                        OutstandingTerakhir,
+                        AngsuranTerakhir,
+                        GradeTerakhir,
+                        TotalPendapatanPenjualan,
+                        TotalPembelian,
+                        PengeluaranUsaha,
+                        PendapatanBersihUsaha,
+                        PendapatanLain,
+                        PengeluaranNonUsaha,
+                        SisaPenghasilan,
+                        IIR,
+                        IIRNominal,
+                        AngsuranPerBulanRekomendasi,
+                        MMS,
+                        BidangUsahaSaatIni,
+                        DeskripsiUsahaSaatIni,
+                        WaktuOperasional,
+                        StatusMilikTempatUsaha,
+                        LamaUsaha};
+                rowPersetujuanPembiayaanRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPersetujuanPembiayaanRow);
+                return rowPersetujuanPembiayaanRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                PersetujuanPembiayaanDataTable cln = ((PersetujuanPembiayaanDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new PersetujuanPembiayaanDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnOfficerName = base.Columns["OfficerName"];
+                this.columnNamaNasabah = base.Columns["NamaNasabah"];
+                this.columnBergabungSelama = base.Columns["BergabungSelama"];
+                this.columnProdukPembiayaanRekomendasi = base.Columns["ProdukPembiayaanRekomendasi"];
+                this.columnPlafonRekomendasi = base.Columns["PlafonRekomendasi"];
+                this.columnTenorRekomendasi = base.Columns["TenorRekomendasi"];
+                this.columnMargin = base.Columns["Margin"];
+                this.columnSaldoTabunganSaatIni = base.Columns["SaldoTabunganSaatIni"];
+                this.columnLimitPembiayaanTotal = base.Columns["LimitPembiayaanTotal"];
+                this.columnLimitTersisa = base.Columns["LimitTersisa"];
+                this.columnLimitTerpakai = base.Columns["LimitTerpakai"];
+                this.columnPlafonTerakhir = base.Columns["PlafonTerakhir"];
+                this.columnTenorTerakhir = base.Columns["TenorTerakhir"];
+                this.columnProdukTerakhir = base.Columns["ProdukTerakhir"];
+                this.columnOutstandingTerakhir = base.Columns["OutstandingTerakhir"];
+                this.columnAngsuranTerakhir = base.Columns["AngsuranTerakhir"];
+                this.columnGradeTerakhir = base.Columns["GradeTerakhir"];
+                this.columnTotalPendapatanPenjualan = base.Columns["TotalPendapatanPenjualan"];
+                this.columnTotalPembelian = base.Columns["TotalPembelian"];
+                this.columnPengeluaranUsaha = base.Columns["PengeluaranUsaha"];
+                this.columnPendapatanBersihUsaha = base.Columns["PendapatanBersihUsaha"];
+                this.columnPendapatanLain = base.Columns["PendapatanLain"];
+                this.columnPengeluaranNonUsaha = base.Columns["PengeluaranNonUsaha"];
+                this.columnSisaPenghasilan = base.Columns["SisaPenghasilan"];
+                this.columnIIR = base.Columns["IIR"];
+                this.columnIIRNominal = base.Columns["IIRNominal"];
+                this.columnAngsuranPerBulanRekomendasi = base.Columns["AngsuranPerBulanRekomendasi"];
+                this.columnMMS = base.Columns["MMS"];
+                this.columnBidangUsahaSaatIni = base.Columns["BidangUsahaSaatIni"];
+                this.columnDeskripsiUsahaSaatIni = base.Columns["DeskripsiUsahaSaatIni"];
+                this.columnWaktuOperasional = base.Columns["WaktuOperasional"];
+                this.columnStatusMilikTempatUsaha = base.Columns["StatusMilikTempatUsaha"];
+                this.columnLamaUsaha = base.Columns["LamaUsaha"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnOfficerName = new global::System.Data.DataColumn("OfficerName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOfficerName);
+                this.columnNamaNasabah = new global::System.Data.DataColumn("NamaNasabah", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNamaNasabah);
+                this.columnBergabungSelama = new global::System.Data.DataColumn("BergabungSelama", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBergabungSelama);
+                this.columnProdukPembiayaanRekomendasi = new global::System.Data.DataColumn("ProdukPembiayaanRekomendasi", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProdukPembiayaanRekomendasi);
+                this.columnPlafonRekomendasi = new global::System.Data.DataColumn("PlafonRekomendasi", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPlafonRekomendasi);
+                this.columnTenorRekomendasi = new global::System.Data.DataColumn("TenorRekomendasi", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTenorRekomendasi);
+                this.columnMargin = new global::System.Data.DataColumn("Margin", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMargin);
+                this.columnSaldoTabunganSaatIni = new global::System.Data.DataColumn("SaldoTabunganSaatIni", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSaldoTabunganSaatIni);
+                this.columnLimitPembiayaanTotal = new global::System.Data.DataColumn("LimitPembiayaanTotal", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLimitPembiayaanTotal);
+                this.columnLimitTersisa = new global::System.Data.DataColumn("LimitTersisa", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLimitTersisa);
+                this.columnLimitTerpakai = new global::System.Data.DataColumn("LimitTerpakai", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLimitTerpakai);
+                this.columnPlafonTerakhir = new global::System.Data.DataColumn("PlafonTerakhir", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPlafonTerakhir);
+                this.columnTenorTerakhir = new global::System.Data.DataColumn("TenorTerakhir", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTenorTerakhir);
+                this.columnProdukTerakhir = new global::System.Data.DataColumn("ProdukTerakhir", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProdukTerakhir);
+                this.columnOutstandingTerakhir = new global::System.Data.DataColumn("OutstandingTerakhir", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOutstandingTerakhir);
+                this.columnAngsuranTerakhir = new global::System.Data.DataColumn("AngsuranTerakhir", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAngsuranTerakhir);
+                this.columnGradeTerakhir = new global::System.Data.DataColumn("GradeTerakhir", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGradeTerakhir);
+                this.columnTotalPendapatanPenjualan = new global::System.Data.DataColumn("TotalPendapatanPenjualan", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalPendapatanPenjualan);
+                this.columnTotalPembelian = new global::System.Data.DataColumn("TotalPembelian", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalPembelian);
+                this.columnPengeluaranUsaha = new global::System.Data.DataColumn("PengeluaranUsaha", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPengeluaranUsaha);
+                this.columnPendapatanBersihUsaha = new global::System.Data.DataColumn("PendapatanBersihUsaha", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPendapatanBersihUsaha);
+                this.columnPendapatanLain = new global::System.Data.DataColumn("PendapatanLain", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPendapatanLain);
+                this.columnPengeluaranNonUsaha = new global::System.Data.DataColumn("PengeluaranNonUsaha", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPengeluaranNonUsaha);
+                this.columnSisaPenghasilan = new global::System.Data.DataColumn("SisaPenghasilan", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSisaPenghasilan);
+                this.columnIIR = new global::System.Data.DataColumn("IIR", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIIR);
+                this.columnIIRNominal = new global::System.Data.DataColumn("IIRNominal", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIIRNominal);
+                this.columnAngsuranPerBulanRekomendasi = new global::System.Data.DataColumn("AngsuranPerBulanRekomendasi", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAngsuranPerBulanRekomendasi);
+                this.columnMMS = new global::System.Data.DataColumn("MMS", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMMS);
+                this.columnBidangUsahaSaatIni = new global::System.Data.DataColumn("BidangUsahaSaatIni", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBidangUsahaSaatIni);
+                this.columnDeskripsiUsahaSaatIni = new global::System.Data.DataColumn("DeskripsiUsahaSaatIni", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDeskripsiUsahaSaatIni);
+                this.columnWaktuOperasional = new global::System.Data.DataColumn("WaktuOperasional", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWaktuOperasional);
+                this.columnStatusMilikTempatUsaha = new global::System.Data.DataColumn("StatusMilikTempatUsaha", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStatusMilikTempatUsaha);
+                this.columnLamaUsaha = new global::System.Data.DataColumn("LamaUsaha", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLamaUsaha);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PersetujuanPembiayaanRow NewPersetujuanPembiayaanRow() {
+                return ((PersetujuanPembiayaanRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new PersetujuanPembiayaanRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(PersetujuanPembiayaanRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.PersetujuanPembiayaanRowChanged != null)) {
+                    this.PersetujuanPembiayaanRowChanged(this, new PersetujuanPembiayaanRowChangeEvent(((PersetujuanPembiayaanRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.PersetujuanPembiayaanRowChanging != null)) {
+                    this.PersetujuanPembiayaanRowChanging(this, new PersetujuanPembiayaanRowChangeEvent(((PersetujuanPembiayaanRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.PersetujuanPembiayaanRowDeleted != null)) {
+                    this.PersetujuanPembiayaanRowDeleted(this, new PersetujuanPembiayaanRowChangeEvent(((PersetujuanPembiayaanRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.PersetujuanPembiayaanRowDeleting != null)) {
+                    this.PersetujuanPembiayaanRowDeleting(this, new PersetujuanPembiayaanRowChangeEvent(((PersetujuanPembiayaanRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemovePersetujuanPembiayaanRow(PersetujuanPembiayaanRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                BTPNS_DataSet ds = new BTPNS_DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "PersetujuanPembiayaanDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3704,6 +4467,967 @@ namespace BTPNS.Scheduler {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class PersetujuanPembiayaanRow : global::System.Data.DataRow {
+            
+            private PersetujuanPembiayaanDataTable tablePersetujuanPembiayaan;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal PersetujuanPembiayaanRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablePersetujuanPembiayaan = ((PersetujuanPembiayaanDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string OfficerName {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.OfficerNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OfficerName\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.OfficerNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string NamaNasabah {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.NamaNasabahColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NamaNasabah\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.NamaNasabahColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string BergabungSelama {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.BergabungSelamaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BergabungSelama\' in table \'PersetujuanPembiayaan\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.BergabungSelamaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ProdukPembiayaanRekomendasi {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.ProdukPembiayaanRekomendasiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProdukPembiayaanRekomendasi\' in table \'PersetujuanPembiayaa" +
+                                "n\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.ProdukPembiayaanRekomendasiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PlafonRekomendasi {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.PlafonRekomendasiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PlafonRekomendasi\' in table \'PersetujuanPembiayaan\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.PlafonRekomendasiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int TenorRekomendasi {
+                get {
+                    try {
+                        return ((int)(this[this.tablePersetujuanPembiayaan.TenorRekomendasiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TenorRekomendasi\' in table \'PersetujuanPembiayaan\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.TenorRekomendasiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Margin {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.MarginColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Margin\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.MarginColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal SaldoTabunganSaatIni {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.SaldoTabunganSaatIniColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SaldoTabunganSaatIni\' in table \'PersetujuanPembiayaan\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.SaldoTabunganSaatIniColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal LimitPembiayaanTotal {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.LimitPembiayaanTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LimitPembiayaanTotal\' in table \'PersetujuanPembiayaan\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.LimitPembiayaanTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal LimitTersisa {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.LimitTersisaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LimitTersisa\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.LimitTersisaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal LimitTerpakai {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.LimitTerpakaiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LimitTerpakai\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.LimitTerpakaiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PlafonTerakhir {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.PlafonTerakhirColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PlafonTerakhir\' in table \'PersetujuanPembiayaan\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.PlafonTerakhirColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TenorTerakhir {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.TenorTerakhirColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TenorTerakhir\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.TenorTerakhirColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ProdukTerakhir {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.ProdukTerakhirColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProdukTerakhir\' in table \'PersetujuanPembiayaan\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.ProdukTerakhirColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal OutstandingTerakhir {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.OutstandingTerakhirColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OutstandingTerakhir\' in table \'PersetujuanPembiayaan\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.OutstandingTerakhirColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal AngsuranTerakhir {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.AngsuranTerakhirColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AngsuranTerakhir\' in table \'PersetujuanPembiayaan\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.AngsuranTerakhirColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string GradeTerakhir {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.GradeTerakhirColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GradeTerakhir\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.GradeTerakhirColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal TotalPendapatanPenjualan {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.TotalPendapatanPenjualanColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalPendapatanPenjualan\' in table \'PersetujuanPembiayaan\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.TotalPendapatanPenjualanColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal TotalPembelian {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.TotalPembelianColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalPembelian\' in table \'PersetujuanPembiayaan\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.TotalPembelianColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PengeluaranUsaha {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.PengeluaranUsahaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PengeluaranUsaha\' in table \'PersetujuanPembiayaan\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.PengeluaranUsahaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PendapatanBersihUsaha {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.PendapatanBersihUsahaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PendapatanBersihUsaha\' in table \'PersetujuanPembiayaan\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.PendapatanBersihUsahaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PendapatanLain {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.PendapatanLainColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PendapatanLain\' in table \'PersetujuanPembiayaan\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.PendapatanLainColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PengeluaranNonUsaha {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.PengeluaranNonUsahaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PengeluaranNonUsaha\' in table \'PersetujuanPembiayaan\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.PengeluaranNonUsahaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal SisaPenghasilan {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.SisaPenghasilanColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SisaPenghasilan\' in table \'PersetujuanPembiayaan\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.SisaPenghasilanColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IIR {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.IIRColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IIR\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.IIRColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal IIRNominal {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.IIRNominalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IIRNominal\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.IIRNominalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal AngsuranPerBulanRekomendasi {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.AngsuranPerBulanRekomendasiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AngsuranPerBulanRekomendasi\' in table \'PersetujuanPembiayaa" +
+                                "n\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.AngsuranPerBulanRekomendasiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MMS {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.MMSColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MMS\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.MMSColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string BidangUsahaSaatIni {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.BidangUsahaSaatIniColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BidangUsahaSaatIni\' in table \'PersetujuanPembiayaan\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.BidangUsahaSaatIniColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DeskripsiUsahaSaatIni {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.DeskripsiUsahaSaatIniColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeskripsiUsahaSaatIni\' in table \'PersetujuanPembiayaan\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.DeskripsiUsahaSaatIniColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string WaktuOperasional {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.WaktuOperasionalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'WaktuOperasional\' in table \'PersetujuanPembiayaan\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.WaktuOperasionalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string StatusMilikTempatUsaha {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.StatusMilikTempatUsahaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'StatusMilikTempatUsaha\' in table \'PersetujuanPembiayaan\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.StatusMilikTempatUsahaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int LamaUsaha {
+                get {
+                    try {
+                        return ((int)(this[this.tablePersetujuanPembiayaan.LamaUsahaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LamaUsaha\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.LamaUsahaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsOfficerNameNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.OfficerNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetOfficerNameNull() {
+                this[this.tablePersetujuanPembiayaan.OfficerNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNamaNasabahNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.NamaNasabahColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNamaNasabahNull() {
+                this[this.tablePersetujuanPembiayaan.NamaNasabahColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBergabungSelamaNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.BergabungSelamaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBergabungSelamaNull() {
+                this[this.tablePersetujuanPembiayaan.BergabungSelamaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsProdukPembiayaanRekomendasiNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.ProdukPembiayaanRekomendasiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetProdukPembiayaanRekomendasiNull() {
+                this[this.tablePersetujuanPembiayaan.ProdukPembiayaanRekomendasiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPlafonRekomendasiNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.PlafonRekomendasiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPlafonRekomendasiNull() {
+                this[this.tablePersetujuanPembiayaan.PlafonRekomendasiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTenorRekomendasiNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.TenorRekomendasiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTenorRekomendasiNull() {
+                this[this.tablePersetujuanPembiayaan.TenorRekomendasiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsMarginNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.MarginColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetMarginNull() {
+                this[this.tablePersetujuanPembiayaan.MarginColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSaldoTabunganSaatIniNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.SaldoTabunganSaatIniColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSaldoTabunganSaatIniNull() {
+                this[this.tablePersetujuanPembiayaan.SaldoTabunganSaatIniColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLimitPembiayaanTotalNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.LimitPembiayaanTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLimitPembiayaanTotalNull() {
+                this[this.tablePersetujuanPembiayaan.LimitPembiayaanTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLimitTersisaNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.LimitTersisaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLimitTersisaNull() {
+                this[this.tablePersetujuanPembiayaan.LimitTersisaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLimitTerpakaiNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.LimitTerpakaiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLimitTerpakaiNull() {
+                this[this.tablePersetujuanPembiayaan.LimitTerpakaiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPlafonTerakhirNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.PlafonTerakhirColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPlafonTerakhirNull() {
+                this[this.tablePersetujuanPembiayaan.PlafonTerakhirColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTenorTerakhirNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.TenorTerakhirColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTenorTerakhirNull() {
+                this[this.tablePersetujuanPembiayaan.TenorTerakhirColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsProdukTerakhirNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.ProdukTerakhirColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetProdukTerakhirNull() {
+                this[this.tablePersetujuanPembiayaan.ProdukTerakhirColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsOutstandingTerakhirNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.OutstandingTerakhirColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetOutstandingTerakhirNull() {
+                this[this.tablePersetujuanPembiayaan.OutstandingTerakhirColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAngsuranTerakhirNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.AngsuranTerakhirColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAngsuranTerakhirNull() {
+                this[this.tablePersetujuanPembiayaan.AngsuranTerakhirColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsGradeTerakhirNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.GradeTerakhirColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetGradeTerakhirNull() {
+                this[this.tablePersetujuanPembiayaan.GradeTerakhirColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalPendapatanPenjualanNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.TotalPendapatanPenjualanColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalPendapatanPenjualanNull() {
+                this[this.tablePersetujuanPembiayaan.TotalPendapatanPenjualanColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalPembelianNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.TotalPembelianColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalPembelianNull() {
+                this[this.tablePersetujuanPembiayaan.TotalPembelianColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPengeluaranUsahaNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.PengeluaranUsahaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPengeluaranUsahaNull() {
+                this[this.tablePersetujuanPembiayaan.PengeluaranUsahaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPendapatanBersihUsahaNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.PendapatanBersihUsahaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPendapatanBersihUsahaNull() {
+                this[this.tablePersetujuanPembiayaan.PendapatanBersihUsahaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPendapatanLainNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.PendapatanLainColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPendapatanLainNull() {
+                this[this.tablePersetujuanPembiayaan.PendapatanLainColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPengeluaranNonUsahaNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.PengeluaranNonUsahaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPengeluaranNonUsahaNull() {
+                this[this.tablePersetujuanPembiayaan.PengeluaranNonUsahaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSisaPenghasilanNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.SisaPenghasilanColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSisaPenghasilanNull() {
+                this[this.tablePersetujuanPembiayaan.SisaPenghasilanColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIIRNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.IIRColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIIRNull() {
+                this[this.tablePersetujuanPembiayaan.IIRColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIIRNominalNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.IIRNominalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIIRNominalNull() {
+                this[this.tablePersetujuanPembiayaan.IIRNominalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAngsuranPerBulanRekomendasiNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.AngsuranPerBulanRekomendasiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAngsuranPerBulanRekomendasiNull() {
+                this[this.tablePersetujuanPembiayaan.AngsuranPerBulanRekomendasiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsMMSNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.MMSColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetMMSNull() {
+                this[this.tablePersetujuanPembiayaan.MMSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBidangUsahaSaatIniNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.BidangUsahaSaatIniColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBidangUsahaSaatIniNull() {
+                this[this.tablePersetujuanPembiayaan.BidangUsahaSaatIniColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDeskripsiUsahaSaatIniNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.DeskripsiUsahaSaatIniColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDeskripsiUsahaSaatIniNull() {
+                this[this.tablePersetujuanPembiayaan.DeskripsiUsahaSaatIniColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsWaktuOperasionalNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.WaktuOperasionalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetWaktuOperasionalNull() {
+                this[this.tablePersetujuanPembiayaan.WaktuOperasionalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsStatusMilikTempatUsahaNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.StatusMilikTempatUsahaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetStatusMilikTempatUsahaNull() {
+                this[this.tablePersetujuanPembiayaan.StatusMilikTempatUsahaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLamaUsahaNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.LamaUsahaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLamaUsahaNull() {
+                this[this.tablePersetujuanPembiayaan.LamaUsahaColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -3791,6 +5515,40 @@ namespace BTPNS.Scheduler {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BarangYangDibiayai2Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class PersetujuanPembiayaanRowChangeEvent : global::System.EventArgs {
+            
+            private PersetujuanPembiayaanRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PersetujuanPembiayaanRowChangeEvent(PersetujuanPembiayaanRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PersetujuanPembiayaanRow Row {
                 get {
                     return this.eventRow;
                 }

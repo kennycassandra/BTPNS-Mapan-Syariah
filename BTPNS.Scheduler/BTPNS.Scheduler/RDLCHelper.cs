@@ -15,6 +15,60 @@ namespace BTPNS.Scheduler
         DataBaseManager db = new DataBaseManager();
         SqlConnection sqlConn = new SqlConnection();
         SqlDataReader reader = null;
+        Utility util = new Utility();
+        public string GenerateSMS()
+        {
+            try
+            {
+
+                DataTable dt = new DataTable();
+                string NoRek, NamaNasabah, NoHp, NomorAkad;
+                db.OpenConnection(ref sqlConn);
+                db.cmd.CommandText = "usp_SMS_Notification_Generate";
+                db.cmd.CommandType = CommandType.StoredProcedure;
+                db.cmd.Parameters.Clear();
+                reader = db.cmd.ExecuteReader();
+                dt.Load(reader);
+                db.CloseDataReader(reader);
+                db.CloseConnection(ref sqlConn);
+
+                string sms_file_name = "MB_IF_" + DateTime.Now.ToString("yyyyMMdd") + dt.Rows.Count.ToString() + ".txt";
+                string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + "\\SMS\\" + sms_file_name;
+
+                db.OpenConnection(ref sqlConn, true);
+                foreach (DataRow row in dt.Rows)
+                {
+                    string TextSMS = "";
+                    NoRek = util.GetStringValue(row, "NomorRekening");
+                    NamaNasabah = util.GetStringValue(row, "NamaNasabah");
+                    NoHp = util.GetStringValue(row, "NoHp");
+                    NomorAkad = util.GetStringValue(row, "NomorAkad");
+                    //20181127|MMS|0812345678|Assalaamu'alaikum. Rekening tabungan Ibu KISWANINGSIH sudah diinput, dg no rek 1234567890. Mohon segera informasikan pada nasabah jika pembiayaan sdh disetujui
+                    using (StreamWriter writer = new StreamWriter(file_output_url, true))
+                    {
+                        TextSMS = "Assalaamu'alaikum. Rekening tabungan Bpk/Ibu " + NamaNasabah + " sudah diinput, dgn no rek " + NoRek + ". Mohon segera informasikan pada nasabah jika pembiayaan sdh disetujui";
+                        writer.WriteLine(DateTime.Now.ToString("yyyyMMdd") + "|" + "NASABAH" + "|" + NoHp + "|" + TextSMS);
+                    }
+
+                    db.cmd.CommandText = "usp_SMS_Notification_Insert";
+                    db.cmd.CommandType = CommandType.StoredProcedure;
+                    db.cmd.Parameters.Clear();
+                    db.AddInParameter(db.cmd, "NomorAkad", NomorAkad);
+                    db.AddInParameter(db.cmd, "ScriptSMS", TextSMS);
+                    db.AddInParameter(db.cmd, "TxtFile", sms_file_name);
+                    db.cmd.ExecuteNonQuery();
+
+                }
+                db.CloseConnection(ref sqlConn, true);
+
+                return file_output_url;
+            }
+            catch (Exception ex)
+            {
+                db.CloseConnection(ref sqlConn);
+                throw ex;
+            }
+        }
          public string GenerateAP3RPDF(string RDLC, string OutputFileName, string NomorAkad)
          {
             try
@@ -85,7 +139,7 @@ namespace BTPNS.Scheduler
                 Byte[] mybytes = report.Render("PDF", null,
                         out extension, out encoding,
                         out mimeType, out streams, out warnings); //for exporting to PDF  
-                string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + "\\" + FileName + ".pdf";
+                string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + "\\AP3R\\" + FileName + ".pdf";
 
                 using (FileStream fs = File.Create(file_output_url))
                 {
@@ -95,6 +149,7 @@ namespace BTPNS.Scheduler
             }
             catch (Exception ex)
             {
+                db.CloseConnection(ref sqlConn);
                 throw ex;
             }
  

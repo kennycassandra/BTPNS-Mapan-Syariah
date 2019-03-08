@@ -72,7 +72,9 @@
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="BTPNS_DataSet.xsc">
       <DependentUpon>BTPNS_DataSet.xsd</DependentUpon>
     </None>
@@ -89,9 +91,12 @@
     <EmbeddedResource Include="RDLC\AP3R.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="RDLC\PersetujuanPembiayaan.rdlc" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Output\" />
+    <Folder Include="Output\AP3R\" />
+    <Folder Include="Output\PersetujuanPembiayaan\" />
+    <Folder Include="Output\SMS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TextFile1.txt" />

@@ -11,7 +11,8 @@ namespace BTPNS.Scheduler
         static void Main(string[] args)
         {
             //here we gooo
-            new RDLCHelper().GenerateAP3RPDF("AP3R.rdlc", "Test123", "");
+            //new RDLCHelper().GenerateAP3RPDF("AP3R.rdlc", "Test123", "");
+            new RDLCHelper().GenerateSMS("");
         }
 
     }

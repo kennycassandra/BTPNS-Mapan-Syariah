@@ -14,7 +14,7 @@ namespace BTPNS.Scheduler
         {
             try
             {
-                using (ClientContext cnx = new ClientContext("https://test.sharepoint.com/sites/test01"))
+                using (ClientContext cnx = new ClientContext(ConfigurationManager.AppSettings["SharePointURL"].ToString()))
                 {
                     string password = ConfigurationManager.AppSettings["PassAccount"].ToString();
                     string account = ConfigurationManager.AppSettings["LoginAccount"].ToString();
