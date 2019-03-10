@@ -2058,6 +2058,28 @@ namespace BTPNS.Scheduler {
             
             private global::System.Data.DataColumn columnLamaUsaha;
             
+            private global::System.Data.DataColumn columnRatioPlafonAktif;
+            
+            private global::System.Data.DataColumn columnRatioSaldoTabungan;
+            
+            private global::System.Data.DataColumn columnTOPUPProductName;
+            
+            private global::System.Data.DataColumn columnAmtTOPUPPlafond;
+            
+            private global::System.Data.DataColumn columnAmtTOPUPOutstandingRemaining;
+            
+            private global::System.Data.DataColumn columnAmtTOPUPInstallment;
+            
+            private global::System.Data.DataColumn columnTOPUPTenor;
+            
+            private global::System.Data.DataColumn columnTOPUPDPD;
+            
+            private global::System.Data.DataColumn columnGradeTopUp;
+            
+            private global::System.Data.DataColumn columnTOPUPAccountStatus;
+            
+            private global::System.Data.DataColumn columnDataColumn2;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PersetujuanPembiayaanDataTable() {
@@ -2357,6 +2379,94 @@ namespace BTPNS.Scheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RatioPlafonAktifColumn {
+                get {
+                    return this.columnRatioPlafonAktif;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RatioSaldoTabunganColumn {
+                get {
+                    return this.columnRatioSaldoTabungan;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TOPUPProductNameColumn {
+                get {
+                    return this.columnTOPUPProductName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AmtTOPUPPlafondColumn {
+                get {
+                    return this.columnAmtTOPUPPlafond;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AmtTOPUPOutstandingRemainingColumn {
+                get {
+                    return this.columnAmtTOPUPOutstandingRemaining;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AmtTOPUPInstallmentColumn {
+                get {
+                    return this.columnAmtTOPUPInstallment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TOPUPTenorColumn {
+                get {
+                    return this.columnTOPUPTenor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TOPUPDPDColumn {
+                get {
+                    return this.columnTOPUPDPD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn GradeTopUpColumn {
+                get {
+                    return this.columnGradeTopUp;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TOPUPAccountStatusColumn {
+                get {
+                    return this.columnTOPUPAccountStatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DataColumn2Column {
+                get {
+                    return this.columnDataColumn2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2425,7 +2535,18 @@ namespace BTPNS.Scheduler {
                         string DeskripsiUsahaSaatIni, 
                         string WaktuOperasional, 
                         string StatusMilikTempatUsaha, 
-                        int LamaUsaha) {
+                        int LamaUsaha, 
+                        decimal RatioPlafonAktif, 
+                        decimal RatioSaldoTabungan, 
+                        string TOPUPProductName, 
+                        decimal AmtTOPUPPlafond, 
+                        decimal AmtTOPUPOutstandingRemaining, 
+                        decimal AmtTOPUPInstallment, 
+                        int TOPUPTenor, 
+                        int TOPUPDPD, 
+                        string GradeTopUp, 
+                        string TOPUPAccountStatus, 
+                        string DataColumn2) {
                 PersetujuanPembiayaanRow rowPersetujuanPembiayaanRow = ((PersetujuanPembiayaanRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         OfficerName,
@@ -2460,7 +2581,18 @@ namespace BTPNS.Scheduler {
                         DeskripsiUsahaSaatIni,
                         WaktuOperasional,
                         StatusMilikTempatUsaha,
-                        LamaUsaha};
+                        LamaUsaha,
+                        RatioPlafonAktif,
+                        RatioSaldoTabungan,
+                        TOPUPProductName,
+                        AmtTOPUPPlafond,
+                        AmtTOPUPOutstandingRemaining,
+                        AmtTOPUPInstallment,
+                        TOPUPTenor,
+                        TOPUPDPD,
+                        GradeTopUp,
+                        TOPUPAccountStatus,
+                        DataColumn2};
                 rowPersetujuanPembiayaanRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPersetujuanPembiayaanRow);
                 return rowPersetujuanPembiayaanRow;
@@ -2516,6 +2648,17 @@ namespace BTPNS.Scheduler {
                 this.columnWaktuOperasional = base.Columns["WaktuOperasional"];
                 this.columnStatusMilikTempatUsaha = base.Columns["StatusMilikTempatUsaha"];
                 this.columnLamaUsaha = base.Columns["LamaUsaha"];
+                this.columnRatioPlafonAktif = base.Columns["RatioPlafonAktif"];
+                this.columnRatioSaldoTabungan = base.Columns["RatioSaldoTabungan"];
+                this.columnTOPUPProductName = base.Columns["TOPUPProductName"];
+                this.columnAmtTOPUPPlafond = base.Columns["AmtTOPUPPlafond"];
+                this.columnAmtTOPUPOutstandingRemaining = base.Columns["AmtTOPUPOutstandingRemaining"];
+                this.columnAmtTOPUPInstallment = base.Columns["AmtTOPUPInstallment"];
+                this.columnTOPUPTenor = base.Columns["TOPUPTenor"];
+                this.columnTOPUPDPD = base.Columns["TOPUPDPD"];
+                this.columnGradeTopUp = base.Columns["GradeTopUp"];
+                this.columnTOPUPAccountStatus = base.Columns["TOPUPAccountStatus"];
+                this.columnDataColumn2 = base.Columns["DataColumn2"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2587,6 +2730,28 @@ namespace BTPNS.Scheduler {
                 base.Columns.Add(this.columnStatusMilikTempatUsaha);
                 this.columnLamaUsaha = new global::System.Data.DataColumn("LamaUsaha", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLamaUsaha);
+                this.columnRatioPlafonAktif = new global::System.Data.DataColumn("RatioPlafonAktif", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRatioPlafonAktif);
+                this.columnRatioSaldoTabungan = new global::System.Data.DataColumn("RatioSaldoTabungan", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRatioSaldoTabungan);
+                this.columnTOPUPProductName = new global::System.Data.DataColumn("TOPUPProductName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTOPUPProductName);
+                this.columnAmtTOPUPPlafond = new global::System.Data.DataColumn("AmtTOPUPPlafond", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAmtTOPUPPlafond);
+                this.columnAmtTOPUPOutstandingRemaining = new global::System.Data.DataColumn("AmtTOPUPOutstandingRemaining", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAmtTOPUPOutstandingRemaining);
+                this.columnAmtTOPUPInstallment = new global::System.Data.DataColumn("AmtTOPUPInstallment", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAmtTOPUPInstallment);
+                this.columnTOPUPTenor = new global::System.Data.DataColumn("TOPUPTenor", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTOPUPTenor);
+                this.columnTOPUPDPD = new global::System.Data.DataColumn("TOPUPDPD", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTOPUPDPD);
+                this.columnGradeTopUp = new global::System.Data.DataColumn("GradeTopUp", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGradeTopUp);
+                this.columnTOPUPAccountStatus = new global::System.Data.DataColumn("TOPUPAccountStatus", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTOPUPAccountStatus);
+                this.columnDataColumn2 = new global::System.Data.DataColumn("DataColumn2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDataColumn2);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5032,6 +5197,189 @@ namespace BTPNS.Scheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal RatioPlafonAktif {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.RatioPlafonAktifColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RatioPlafonAktif\' in table \'PersetujuanPembiayaan\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.RatioPlafonAktifColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal RatioSaldoTabungan {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.RatioSaldoTabunganColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RatioSaldoTabungan\' in table \'PersetujuanPembiayaan\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.RatioSaldoTabunganColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TOPUPProductName {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.TOPUPProductNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TOPUPProductName\' in table \'PersetujuanPembiayaan\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.TOPUPProductNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal AmtTOPUPPlafond {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.AmtTOPUPPlafondColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AmtTOPUPPlafond\' in table \'PersetujuanPembiayaan\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.AmtTOPUPPlafondColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal AmtTOPUPOutstandingRemaining {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.AmtTOPUPOutstandingRemainingColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AmtTOPUPOutstandingRemaining\' in table \'PersetujuanPembiaya" +
+                                "an\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.AmtTOPUPOutstandingRemainingColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal AmtTOPUPInstallment {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePersetujuanPembiayaan.AmtTOPUPInstallmentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AmtTOPUPInstallment\' in table \'PersetujuanPembiayaan\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.AmtTOPUPInstallmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int TOPUPTenor {
+                get {
+                    try {
+                        return ((int)(this[this.tablePersetujuanPembiayaan.TOPUPTenorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TOPUPTenor\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.TOPUPTenorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int TOPUPDPD {
+                get {
+                    try {
+                        return ((int)(this[this.tablePersetujuanPembiayaan.TOPUPDPDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TOPUPDPD\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.TOPUPDPDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string GradeTopUp {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.GradeTopUpColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GradeTopUp\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.GradeTopUpColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TOPUPAccountStatus {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.TOPUPAccountStatusColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TOPUPAccountStatus\' in table \'PersetujuanPembiayaan\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.TOPUPAccountStatusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DataColumn2 {
+                get {
+                    try {
+                        return ((string)(this[this.tablePersetujuanPembiayaan.DataColumn2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DataColumn2\' in table \'PersetujuanPembiayaan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePersetujuanPembiayaan.DataColumn2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsOfficerNameNull() {
                 return this.IsNull(this.tablePersetujuanPembiayaan.OfficerNameColumn);
             }
@@ -5424,6 +5772,138 @@ namespace BTPNS.Scheduler {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetLamaUsahaNull() {
                 this[this.tablePersetujuanPembiayaan.LamaUsahaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRatioPlafonAktifNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.RatioPlafonAktifColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRatioPlafonAktifNull() {
+                this[this.tablePersetujuanPembiayaan.RatioPlafonAktifColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRatioSaldoTabunganNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.RatioSaldoTabunganColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRatioSaldoTabunganNull() {
+                this[this.tablePersetujuanPembiayaan.RatioSaldoTabunganColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTOPUPProductNameNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.TOPUPProductNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTOPUPProductNameNull() {
+                this[this.tablePersetujuanPembiayaan.TOPUPProductNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAmtTOPUPPlafondNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.AmtTOPUPPlafondColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAmtTOPUPPlafondNull() {
+                this[this.tablePersetujuanPembiayaan.AmtTOPUPPlafondColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAmtTOPUPOutstandingRemainingNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.AmtTOPUPOutstandingRemainingColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAmtTOPUPOutstandingRemainingNull() {
+                this[this.tablePersetujuanPembiayaan.AmtTOPUPOutstandingRemainingColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAmtTOPUPInstallmentNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.AmtTOPUPInstallmentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAmtTOPUPInstallmentNull() {
+                this[this.tablePersetujuanPembiayaan.AmtTOPUPInstallmentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTOPUPTenorNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.TOPUPTenorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTOPUPTenorNull() {
+                this[this.tablePersetujuanPembiayaan.TOPUPTenorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTOPUPDPDNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.TOPUPDPDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTOPUPDPDNull() {
+                this[this.tablePersetujuanPembiayaan.TOPUPDPDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsGradeTopUpNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.GradeTopUpColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetGradeTopUpNull() {
+                this[this.tablePersetujuanPembiayaan.GradeTopUpColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTOPUPAccountStatusNull() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.TOPUPAccountStatusColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTOPUPAccountStatusNull() {
+                this[this.tablePersetujuanPembiayaan.TOPUPAccountStatusColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDataColumn2Null() {
+                return this.IsNull(this.tablePersetujuanPembiayaan.DataColumn2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDataColumn2Null() {
+                this[this.tablePersetujuanPembiayaan.DataColumn2Column] = global::System.Convert.DBNull;
             }
         }
         

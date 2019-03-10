@@ -9,7 +9,7 @@
     <Shape ID="DesignTable:APER" ZOrder="4" X="83" Y="75" Height="982" Width="281" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="978" />
     <Shape ID="DesignTable:BarangYangDibiayai1" ZOrder="3" X="562" Y="314" Height="118" Width="262" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="114" />
     <Shape ID="DesignTable:BarangYangDibiayai2" ZOrder="2" X="873" Y="323" Height="118" Width="262" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="114" />
-    <Shape ID="DesignTable:PersetujuanPembiayaan" ZOrder="1" X="1170" Y="324" Height="902" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="898" />
+    <Shape ID="DesignTable:PersetujuanPembiayaan" ZOrder="1" X="1170" Y="324" Height="901" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="897" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

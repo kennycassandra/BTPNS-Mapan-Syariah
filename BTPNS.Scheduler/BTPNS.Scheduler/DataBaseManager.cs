@@ -11,16 +11,27 @@ namespace BTPNS.Scheduler
 {
     public class DataBaseManager
     {
-        //public string sqlConnection = "Data Source=SP2K13;Initial Catalog=POC_CIMB;User ID = sa; Password=pass@word1";
+        //public string sqlConnection = "Data Source=SP2K13;Initial Catalog=POC;User ID = sa; Password=pass@word1";
         public string sqlConnection = ConfigurationManager.ConnectionStrings["cnstr"].ToString();
         public SqlCommand cmd;
         public SqlDataReader dReader;
         public SqlTransaction trans;
+        public string GetConnString()
+        {
+            try
+            {
+                return ConfigurationManager.ConnectionStrings["cnstr"].ToString();
+            }
+            catch 
+            {
+                return "Data Source=.;Initial Catalog=IFMS;Integrated Security=True;User ID = sa; Password=pass@word1";
+            }
+        }
         public void OpenConnection(ref SqlConnection connection, bool IsTrans = false)
         {
             if (connection == null)
             {
-                connection = new SqlConnection(sqlConnection);
+                connection = new SqlConnection(GetConnString());
                 connection.Open();
                 cmd = connection.CreateCommand();
                 cmd.CommandTimeout = 0;
@@ -34,7 +45,7 @@ namespace BTPNS.Scheduler
             {
                 if (connection.State == ConnectionState.Closed)
                 {
-                    connection = new SqlConnection(sqlConnection);
+                    connection = new SqlConnection(GetConnString());
                     connection.Open();
                     cmd = connection.CreateCommand();
                     cmd.CommandTimeout = 0;
