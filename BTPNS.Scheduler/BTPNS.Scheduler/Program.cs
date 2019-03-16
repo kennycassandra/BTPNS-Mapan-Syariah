@@ -14,8 +14,10 @@ namespace BTPNS.Scheduler
             //new MailHelper().email_send();
             //new SharePointHelper().UploadFileToDocLib("C:\\Log2.txt");
             new RDLCHelper().GeneratePDF();
+            Console.WriteLine("Generate PDF Done");
             new RDLCHelper().GenerateSMS();
-
+            Console.WriteLine("Generate Txt SMS Notif Done");
+            Console.ReadLine();
             //int Start_PUS = 11; int Start_PRS =21;
             //int End_PUS = 50; int End_PRS = 50;
             //int Tenor = 24;

@@ -33,7 +33,6 @@ namespace BTPNS.Scheduler
 
                 db.CloseConnection(ref sqlConn);
 
-                db.OpenConnection(ref sqlConn);
                 foreach(DataRow row in dt.Rows)
                 {
                     string NomorAkad = util.GetStringValue(row, "NomorAkad");
@@ -44,6 +43,8 @@ namespace BTPNS.Scheduler
                     Console.WriteLine("Output1 : {0}", output1);
                     Console.WriteLine("Output2 : {0}", output2);
 
+                    db.OpenConnection(ref sqlConn);
+
                     db.cmd.CommandText = "usp_Log_GeneratePDF_Insert";
                     db.cmd.CommandType = CommandType.StoredProcedure;
                     db.cmd.Parameters.Clear();
@@ -53,9 +54,9 @@ namespace BTPNS.Scheduler
                     db.AddInParameter(db.cmd, "OutputName2", output2);
 
                     db.cmd.ExecuteNonQuery();
+                    db.CloseConnection(ref sqlConn);
 
                 }
-                db.CloseConnection(ref sqlConn);
                 Console.WriteLine("Success");
             }
             catch (Exception ex)

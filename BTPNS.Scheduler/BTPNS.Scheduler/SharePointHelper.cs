@@ -11,7 +11,7 @@ namespace BTPNS.Scheduler
 {
     public class SharePointHelper
     {
-        public void UploadFileToDocLib(string SelectedfilePath)
+        public void UploadFileToDocLib(string SelectedfilePath, string DocLib)
         {
             SPSite Site = new SPSite(ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString());
             SPSecurity.RunWithElevatedPrivileges(delegate ()
@@ -21,7 +21,7 @@ namespace BTPNS.Scheduler
                     web.AllowUnsafeUpdates = true;
                     if (!System.IO.File.Exists(SelectedfilePath))
                         throw new FileNotFoundException("File not found.", SelectedfilePath);
-                    SPFolder libFolder = web.Folders["IFMS PDF"];
+                    SPFolder libFolder = web.Folders[DocLib];
 
                     // Prepare to upload
                     string fileName = System.IO.Path.GetFileName(SelectedfilePath);
