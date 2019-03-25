@@ -12,7 +12,7 @@ namespace BTPNS.Scheduler
     public class DataBaseManager
     {
         //public string sqlConnection = "Data Source=SP2K13;Initial Catalog=POC;User ID = sa; Password=pass@word1";
-        public string sqlConnection = ConfigurationManager.ConnectionStrings["cnstr"].ToString();
+        public string sqlConnection = "";
         public SqlCommand cmd;
         public SqlDataReader dReader;
         public SqlTransaction trans;

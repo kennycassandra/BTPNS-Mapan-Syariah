@@ -162,11 +162,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
-                                <Format>MM/dd/yyyy</Format>
+                                <Format>dd/MM/yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>TglJamSurvey</rd:DefaultName>
@@ -712,7 +714,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Produk PMD iB</Value>
+                              <Value>Produk</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
@@ -770,14 +772,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Produk">
+                    <Textbox Name="ProdukPembiayaanRekomendasi">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Produk.Value</Value>
+                              <Value>=Fields!ProdukPembiayaanRekomendasi.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
@@ -787,7 +789,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Produk</rd:DefaultName>
+                      <rd:DefaultName>ProdukPembiayaanRekomendasi</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -4529,11 +4531,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
-                                <Format>MM/dd/yyyy</Format>
+                                <Format>dd/MM/yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>TanggalLahir</rd:DefaultName>
@@ -5338,11 +5342,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
-                                <Format>MM/dd/yyyy</Format>
+                                <Format>dd/MM/yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>TanggalLahirPasangan</rd:DefaultName>
@@ -7568,7 +7574,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox21</rd:DefaultName>
@@ -7663,10 +7671,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox34</rd:DefaultName>
@@ -7679,6 +7690,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -7769,7 +7781,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox25</rd:DefaultName>
@@ -7864,10 +7878,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox37</rd:DefaultName>
@@ -7880,6 +7897,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -7970,7 +7988,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox28</rd:DefaultName>
@@ -8065,10 +8085,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox40</rd:DefaultName>
@@ -8081,6 +8104,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -8164,14 +8188,16 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!LamaUsaha.Value</Value>
+                              <Value>=Fields!LamaUsaha.Value.ToString() + " Bulan"</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox31</rd:DefaultName>
@@ -8313,7 +8339,7 @@
         <Top>0.36806in</Top>
         <Left>4.28472in</Left>
         <Height>0.56in</Height>
-        <Width>5.90057in</Width>
+        <Width>5.90056in</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -8421,7 +8447,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox21</rd:DefaultName>
@@ -8517,14 +8545,16 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!BidangUsahaSaatIni.Value</Value>
+                              <Value>=Fields!BidangUsahaDibiayai.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox25</rd:DefaultName>
@@ -8620,14 +8650,16 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!DeskripsiUsahaSaatIni.Value</Value>
+                              <Value>=Fields!DeskripsiUsahaDibiayai.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox28</rd:DefaultName>
@@ -8730,7 +8762,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox31</rd:DefaultName>
@@ -9019,7 +9053,7 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
-                                <Format>#,0.00;(#,0.00)</Format>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -9038,6 +9072,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -9279,7 +9314,7 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
-                                <Format>#,0.00;(#,0.00)</Format>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -9298,6 +9333,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -9327,7 +9363,7 @@
         <Top>1.77083in</Top>
         <Left>7.66222in</Left>
         <Height>0.39237in</Height>
-        <Width>2.73333in</Width>
+        <Width>2.73334in</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -9379,6 +9415,7 @@
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>7pt</FontSize>
+                  <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -9389,7 +9426,7 @@
         <Top>2.20486in</Top>
         <Left>5.63194in</Left>
         <Height>0.17014in</Height>
-        <Width>0.68528in</Width>
+        <Width>1.04986in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -9399,6 +9436,7 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Textbox Name="Textbox15">
@@ -9573,10 +9611,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox21</rd:DefaultName>
@@ -9589,6 +9630,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -9674,7 +9716,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox190</rd:DefaultName>
@@ -9774,10 +9818,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox25</rd:DefaultName>
@@ -9790,6 +9837,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -9872,10 +9920,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Angsuran</rd:DefaultName>
@@ -9888,6 +9939,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -9975,10 +10027,13 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
+                                <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>HargaJual</rd:DefaultName>
@@ -9991,6 +10046,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -10080,7 +10136,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>NomorRekening</rd:DefaultName>
@@ -10176,14 +10234,16 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Tenor.Value</Value>
+                              <Value>=Fields!Tenor.Value.ToString() + " Bulan"</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox28</rd:DefaultName>
@@ -10281,7 +10341,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox206</rd:DefaultName>
@@ -10377,14 +10439,16 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Tenor.Value</Value>
+                              <Value>=Fields!Tenor.Value.ToString() + " Kali"</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox28</rd:DefaultName>
@@ -10482,7 +10546,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox209</rd:DefaultName>
@@ -10659,7 +10725,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -12255,6 +12320,39 @@ a. memberikan data/atau menyebarluaskan data pribadi Nasabah kepada pihak lain (
           <PaddingBottom>1pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox40">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!DimulaiDari.Value, "APER_DataSet")</Value>
+                <Style>
+                  <FontFamily>Tahoma</FontFamily>
+                  <FontSize>6pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox40</rd:DefaultName>
+        <Top>2.63541in</Top>
+        <Left>8.76862in</Left>
+        <Height>0.18639in</Height>
+        <Width>1.58805in</Width>
+        <ZIndex>46</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>7.01958in</Height>
     <Style />
@@ -12505,6 +12603,22 @@ a. memberikan data/atau menyebarluaskan data pribadi Nasabah kepada pihak lain (
         <Field Name="HargaJual">
           <DataField>HargaJual</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="BidangUsahaDibiayai">
+          <DataField>BidangUsahaDibiayai</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DeskripsiUsahaDibiayai">
+          <DataField>DeskripsiUsahaDibiayai</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProdukPembiayaanRekomendasi">
+          <DataField>ProdukPembiayaanRekomendasi</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DimulaiDari">
+          <DataField>DimulaiDari</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

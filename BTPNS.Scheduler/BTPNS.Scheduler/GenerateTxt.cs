@@ -53,7 +53,7 @@ namespace BTPNS.Scheduler
                     db.CloseConnection(ref sqlConn);
 
                     string Officer = "";
-                    string txt_file_name = "PEMBIAYAAN_" + DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + util.GetStringValue(row, "TotalRow") + ".txt"; //kurang total row
+                    string txt_file_name = "PEMBIAYAAN_" + DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + util.GetStringValue(row, "TotalRow") + ".txt";
                     string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + "\\TXT\\Pembiayaan\\" + txt_file_name;
 
                     #region Write Txt
@@ -171,19 +171,21 @@ namespace BTPNS.Scheduler
                     }
                     #endregion
 
-                    new SharePointHelper().UploadFileToDocLib(file_output_url, "Pembiayaan");
+                    //new SharePointHelper().UploadFileToDocLib(file_output_url, "Pembiayaan");
                     EmailTxt eml = new EmailTxt();
                     eml.Email = util.GetStringValue(row, "GeneratedBy");
                     eml.file_attachment = file_output_url;
                     eml.NomorDraft = NomorDraft;
                     list.Add(eml);
                 }
+                EmailSend(list, "Pembiayaan");
                 return list;
             }
             catch (Exception ex)
             {
                 db.CloseConnection(ref sqlConn);
-                throw ex;
+                Console.WriteLine(ex);
+                return null;
             }
         }
 
@@ -207,7 +209,8 @@ namespace BTPNS.Scheduler
                 foreach (DataRow row in dt.Rows)
                 {
                     string NomorDraft = util.GetStringValue(row, "NomorDraft");
-                    string txt_file_name = "CIF_" + DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HH:mm:ss") + "_" + ".txt"; //kurang total row
+                    string txt_file_name = "CIF_" + DateTime.Now.ToString("yyyyMMdd") + "_" + 
+                                    DateTime.Now.ToString("HH:mm:ss") + "_" + util.GetIntValue(row, "TotalRow").ToString() + ".txt";
 
                     string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + "\\TXT\\CIF\\" + txt_file_name;
 
@@ -333,21 +336,65 @@ namespace BTPNS.Scheduler
                     }
                     #endregion
 
-                    new SharePointHelper().UploadFileToDocLib(file_output_url, "CIF");
+                    //new SharePointHelper().UploadFileToDocLib(file_output_url, "CIF");
+                    #region Email List
                     EmailTxt eml = new EmailTxt();
                     eml.Email = util.GetStringValue(row, "GeneratedBy");
                     eml.file_attachment = file_output_url;
                     eml.NomorDraft = NomorDraft;
                     list.Add(eml);
 
+                    #endregion
                 }
+
+
+                EmailSend(list, "CIF");
+
                 return list;
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                db.CloseConnection(ref sqlConn);
+                Console.WriteLine(ex);
+                return null;
             }
+        }
+
+        public void EmailSend(List<EmailTxt> list, string GenerateType)
+        {
+            int i = 0;
+            string Email = "";
+            db.OpenConnection(ref sqlConn);
+            foreach (EmailTxt e in list)
+            {
+                List<string> listAttach = new List<string>();
+                if (i == 0)
+                {
+                    listAttach.Add(e.file_attachment);
+                    Email = e.Email;
+                    new MailHelper().email_send(listAttach, "Generate Txt " + GenerateType, e.Email);
+                }
+                else
+                {
+                    if (Email != e.Email)
+                    {
+                        listAttach = new List<string>();
+                        listAttach.Add(e.file_attachment);
+                        Email = e.Email;
+                        new MailHelper().email_send(listAttach, "Generate Txt " + GenerateType, e.Email);
+                    }
+                }
+                db.cmd.CommandText = "[usp_Generate_CIF_Pembiayaan_Update]";
+                db.cmd.CommandType = CommandType.StoredProcedure;
+                db.cmd.Parameters.Clear();
+
+                db.AddInParameter(db.cmd, "NomorDraft", e.NomorDraft);
+                db.AddInParameter(db.cmd, "GenerateType", GenerateType);
+                db.AddInParameter(db.cmd, "SharePointURL", "");
+
+                db.cmd.ExecuteNonQuery();
+            }
+            db.CloseConnection(ref sqlConn);
         }
     }
 }

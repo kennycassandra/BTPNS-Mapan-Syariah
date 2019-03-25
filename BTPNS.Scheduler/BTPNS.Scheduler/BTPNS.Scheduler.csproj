@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BTPNS_DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="CleansingHelper.cs" />
     <Compile Include="DataBaseManager.cs" />
     <Compile Include="GenerateTxt.cs" />
     <Compile Include="MailHelper.cs" />
@@ -92,12 +93,25 @@
     <EmbeddedResource Include="RDLC\AP3R.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="RDLC\DetailReportMapanSyariah.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RDLC\DetailStatusMapanSyariah.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RDLC\LogManagementReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="RDLC\PersetujuanPembiayaan.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RDLC\SummaryStatusMapanSyariah.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Output\AP3R\" />
+    <Folder Include="Output\Daily\" />
     <Folder Include="Output\PersetujuanPembiayaan\" />
     <Folder Include="Output\SMS\" />
     <Folder Include="Output\TXT\CIF\" />
