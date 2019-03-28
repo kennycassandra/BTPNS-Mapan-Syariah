@@ -10,7 +10,7 @@ namespace BTPNS.Scheduler
 {
     class MailHelper
     {
-        public void email_send(List<string> file_attachment, string Subject, string MailTo)
+        public void email_send(List<string> file_attachment, string Subject, string MailTo, string BodyContent="")
         {
             MailMessage mail = new MailMessage();
 
@@ -18,14 +18,17 @@ namespace BTPNS.Scheduler
             mail.From = new MailAddress(ConfigurationManager.AppSettings["From"].ToString());
             mail.To.Add(MailTo);
             mail.Subject = Subject;
-            mail.Body = "mail with attachment";
+            mail.Body = BodyContent;
             mail.IsBodyHtml = true;
 
             Attachment attachment;
             foreach (string s in file_attachment)
             {
                 attachment = new System.Net.Mail.Attachment(s);
-                mail.Attachments.Add(attachment);
+                if (System.IO.File.Exists(s))
+                {
+                    mail.Attachments.Add(attachment);
+                }
             }
             SmtpServer.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"].ToString());
 

@@ -15,11 +15,13 @@ namespace BTPNS.Scheduler
             try
             {
                 string TestSendEmail = ConfigurationManager.AppSettings["TestSendEmail"].ToString();
+                string OutputFolder = AppDomain.CurrentDomain.BaseDirectory;
                 Console.WriteLine("SMTP : {0}", ConfigurationManager.AppSettings["SMTP"].ToString());
                 Console.WriteLine("From : {0}", ConfigurationManager.AppSettings["From"].ToString());
                 Console.WriteLine("Send To : {0}", ConfigurationManager.AppSettings["TestSendTo"].ToString());
                 Console.WriteLine("SQL Connection String : {0}", ConfigurationManager.ConnectionStrings["cnstr"].ToString());
-
+                //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+                Console.WriteLine("Output Location : {0}", OutputFolder);
                 if (TestSendEmail == "1")
                 {
                     new MailHelper().TestSendEmail();
@@ -27,21 +29,28 @@ namespace BTPNS.Scheduler
                     Console.ReadLine();
                     return;
                 }
+                new SharePointHelper().CreateDocLib(OutputFolder, "AP3R", "IF Mapan Syariah Generate PDF");
+                new SharePointHelper().CreateDocLib(OutputFolder, "CIF", "IF Mapan Syariah Generate PDF");
+                new SharePointHelper().CreateDocLib(OutputFolder, "Pembiayaan", "IF Mapan Syariah Generate PDF");
+                new SharePointHelper().CreateDocLib(OutputFolder, "Persetujuan_Pembiayaan", "IF Mapan Syariah Generate PDF");
+                new SharePointHelper().CreateDocLib(OutputFolder, "SMS_Notification", "IF Mapan Syariah Generate PDF");
 
-                new CleansingHelper().CleansingFiles();
-                new RDLCHelper().GeneratePDF();
-                new RDLCHelper().GenerateSMS();
-                new RDLCHelper().GenerateExcelSummaryReport_Detail1();
-                new RDLCHelper().GenerateExcelSummaryReport_Detail2();
-                new RDLCHelper().GenerateExcelDetailReport();
-                new RDLCHelper().GenerateExcelLogReport();
+
+                new CleansingHelper().CleansingLocalFiles(OutputFolder);
+                new RDLCHelper().GeneratePDF(OutputFolder);
+                new RDLCHelper().GenerateSMS(OutputFolder);
+                new RDLCHelper().GenerateExcelSummaryReport_Detail1(OutputFolder);
+                new RDLCHelper().GenerateExcelSummaryReport_Detail2(OutputFolder);
+                new RDLCHelper().GenerateExcelDetailReport(OutputFolder);
+                new RDLCHelper().GenerateExcelLogReport(OutputFolder);
+                new GenerateTxt().GenerateTxtCIF(OutputFolder);
+                new GenerateTxt().GenerateTxtPembiayaan(OutputFolder);
+                System.Threading.Thread.Sleep(3000);
                 Console.WriteLine("Process Done");
-                Console.ReadLine();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
-                Console.ReadLine();
+                Console.WriteLine(ex);               
             }
 
 

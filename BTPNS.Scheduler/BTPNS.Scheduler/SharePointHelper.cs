@@ -11,10 +11,44 @@ namespace BTPNS.Scheduler
 {
     public class SharePointHelper
     {
-        public void UploadFileToDocLib(string SelectedfilePath, string DocLib)
+        public bool ListExists(SPWeb web, string listName)
+        {
+            return web.Lists.Cast<SPList>().Any(list => string.Equals(list.Title, listName));
+        }
+        public void CreateDocLib(string OutputFolder, string DocLib, string Desc)
         {
             try
             {
+                using (SPSite oSPsite = new SPSite(ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString()))
+                {
+
+                    using (SPWeb oSPWeb = oSPsite.OpenWeb())
+                    {
+                        oSPWeb.AllowUnsafeUpdates = true;
+                        if (!ListExists(oSPWeb, DocLib))
+                        {
+                            /*create list from custom ListTemplate present within ListTemplateGalery */
+                            //SPListTemplateCollection lstTemp = oSPsite.GetCustomListTemplates(oSPWeb);
+                            //SPListTemplate template = lstTemp["custom template name"];
+                            oSPWeb.Lists.Add(DocLib, Desc, SPListTemplateType.DocumentLibrary);
+                            oSPWeb.Update();
+                            oSPWeb.AllowUnsafeUpdates = false;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "CreateDocLib - " + DocLib);
+            }
+          
+        }
+        public string UploadFileToDocLib(string OutputFolder, string SelectedfilePath, string DocLib)
+        {
+            try
+            {
+                string url = "";
                 SPSite Site = new SPSite(ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString());
                 SPSecurity.RunWithElevatedPrivileges(delegate ()
                 {
@@ -35,27 +69,33 @@ namespace BTPNS.Scheduler
                             try
                             {
                                 SPFile fileOld = libFolder.Files[fileName];
+                                url = fileOld.Url;
                                 fileOld.CheckOut();
                             }
-                            catch { }
+                            catch {
+                            }
                         }
 
                         // Upload document
                         SPFile spfile = libFolder.Files.Add(fileName, fileStream, true);
                         libFolder.Update();
+                        url = spfile.Url;
                         try
                         {
                             fileStream.Close();
                         }
-                        catch (Exception) { }
+                        catch (Exception)
+                        {
+                        }
                         web.AllowUnsafeUpdates = false;
-
                     }
                 });
+                return url;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "UploadFileToDocLib - " + DocLib);
+                return "";
             }
 
         }

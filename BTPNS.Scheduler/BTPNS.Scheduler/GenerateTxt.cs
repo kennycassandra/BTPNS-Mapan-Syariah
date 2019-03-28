@@ -22,7 +22,32 @@ namespace BTPNS.Scheduler
         SqlDataReader reader = null;
         Utility util = new Utility();
 
-        public List<EmailTxt> GenerateTxtPembiayaan()
+        public void GenerateTxtLogError(string OutputFolder, string ErrorMessage, string FunctionName)
+        {
+            try
+            {
+                string FolderLog = OutputFolder + "Output" + "\\TXT\\Log\\";
+
+                if (!Directory.Exists(FolderLog))
+                {
+                    Directory.CreateDirectory(FolderLog);
+                }
+                string File_Log_Name = FolderLog + DateTime.Now.ToString("yyyyMMdd");
+                using (StreamWriter writer = new StreamWriter(File_Log_Name, true))
+                {
+                    writer.WriteLine(DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss") + "-" + FunctionName + "-" + ErrorMessage);
+                    writer.Close();
+                    writer.Dispose();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        public List<EmailTxt> GenerateTxtPembiayaan(string OutputFolder)
         {
             DataTable dt = new DataTable();
             DataTable dtDetail = new DataTable();
@@ -38,10 +63,30 @@ namespace BTPNS.Scheduler
                 dt.Load(reader);
                 db.CloseDataReader(reader);
                 db.CloseConnection(ref sqlConn);
-
+                int i = 0;
+                string txt_file_name = "";
+                string Agent = "";
+                string Tgl = DateTime.Now.ToString("yyyyMMdd");
+                string Waktu = DateTime.Now.ToString("HHmmss");
                 foreach (DataRow row in dt.Rows)
                 {
                     string NomorDraft = util.GetStringValue(row, "NomorDraft");
+                    if (i == 0)
+                    {
+                        Agent = util.GetStringValue(row, "GeneratedBy");
+                        txt_file_name = "CIF_" + Tgl + "_" +
+                                    Waktu + "_" + util.GetIntValue(row, "TotalRow").ToString() + ".txt";
+                    }
+                    else
+                    {
+                        if (Agent != util.GetStringValue(row, "GeneratedBy"))
+                        {
+                            Tgl = DateTime.Now.ToString("yyyyMMdd");
+                            Waktu = DateTime.Now.ToString("HHmmss");
+                            txt_file_name = "CIF_" + Tgl + "_" +
+                                        Waktu + "_" + util.GetIntValue(row, "TotalRow").ToString() + ".txt";
+                        }
+                    }
                     db.OpenConnection(ref sqlConn);
                     db.cmd.CommandText = "usp_GeneratePembiayaan";
                     db.cmd.CommandType = CommandType.StoredProcedure;
@@ -53,8 +98,8 @@ namespace BTPNS.Scheduler
                     db.CloseConnection(ref sqlConn);
 
                     string Officer = "";
-                    string txt_file_name = "PEMBIAYAAN_" + DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + util.GetStringValue(row, "TotalRow") + ".txt";
-                    string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + "\\TXT\\Pembiayaan\\" + txt_file_name;
+                    //string txt_file_name = "PEMBIAYAAN_" + DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + util.GetStringValue(row, "TotalRow") + ".txt";
+                    string file_output_url = OutputFolder + "Output" + "\\TXT\\Pembiayaan\\" + txt_file_name;
 
                     #region Write Txt
                     foreach (DataRow r in dtDetail.Rows)
@@ -172,11 +217,15 @@ namespace BTPNS.Scheduler
                     #endregion
 
                     //new SharePointHelper().UploadFileToDocLib(file_output_url, "Pembiayaan");
-                    EmailTxt eml = new EmailTxt();
-                    eml.Email = util.GetStringValue(row, "GeneratedBy");
-                    eml.file_attachment = file_output_url;
-                    eml.NomorDraft = NomorDraft;
-                    list.Add(eml);
+                    if (dtDetail.Rows.Count > 0)
+                    {
+                        EmailTxt eml = new EmailTxt();
+                        eml.Email = util.GetStringValue(row, "GeneratedBy");
+                        eml.file_attachment = file_output_url;
+                        eml.NomorDraft = NomorDraft;
+                        list.Add(eml);
+                    }
+                    Console.WriteLine("Generate Txt Pembiayaan " + txt_file_name + " Done");
                 }
                 EmailSend(list, "Pembiayaan");
                 return list;
@@ -189,13 +238,16 @@ namespace BTPNS.Scheduler
             }
         }
 
-        public List<EmailTxt> GenerateTxtCIF()
+        public List<EmailTxt> GenerateTxtCIF(string OutputFolder)
         {
             DataTable dt = new DataTable();
             DataTable dtDetail = new DataTable();
             List<EmailTxt> list = new List<EmailTxt>();
             try
             {
+                string Tgl = DateTime.Now.ToString("yyyyMMdd");
+                string Waktu = DateTime.Now.ToString("HHmmss");
+                string Agent = "";
                 db.OpenConnection(ref sqlConn);
                 db.cmd.CommandText = "usp_List_UnGenerate_CIF_Pembiayaan_PerAgent";
                 db.cmd.CommandType = CommandType.StoredProcedure;
@@ -205,14 +257,29 @@ namespace BTPNS.Scheduler
                 dt.Load(reader);
                 db.CloseDataReader(reader);
                 db.CloseConnection(ref sqlConn);
-
+                int i = 0;
+                string txt_file_name = "";
                 foreach (DataRow row in dt.Rows)
                 {
                     string NomorDraft = util.GetStringValue(row, "NomorDraft");
-                    string txt_file_name = "CIF_" + DateTime.Now.ToString("yyyyMMdd") + "_" + 
-                                    DateTime.Now.ToString("HH:mm:ss") + "_" + util.GetIntValue(row, "TotalRow").ToString() + ".txt";
+                    if (i == 0)
+                    {
+                        Agent = util.GetStringValue(row, "GeneratedBy");
+                        txt_file_name = "CIF_" + Tgl + "_" +
+                                    Waktu + "_" + util.GetIntValue(row, "TotalRow").ToString() + ".txt";
+                    }
+                    else
+                    {
+                        if (Agent != util.GetStringValue(row, "GeneratedBy"))
+                        {
+                            Tgl = DateTime.Now.ToString("yyyyMMdd");
+                            Waktu = DateTime.Now.ToString("HHmmss");
+                            txt_file_name = "CIF_" + Tgl + "_" +
+                                        Waktu + "_" + util.GetIntValue(row, "TotalRow").ToString() + ".txt";
+                        }
+                    }
 
-                    string file_output_url = Path.Combine(Environment.CurrentDirectory, "Output") + "\\TXT\\CIF\\" + txt_file_name;
+                    string file_output_url = OutputFolder + "Output" + "\\TXT\\CIF\\" + txt_file_name;
 
                     db.OpenConnection(ref sqlConn);
                     db.cmd.CommandText = "usp_GenerateCIF";
@@ -220,7 +287,7 @@ namespace BTPNS.Scheduler
                     db.AddInParameter(db.cmd, "NomorDraft", NomorDraft);
 
                     reader = db.cmd.ExecuteReader();
-
+                    dtDetail = new DataTable();
                     dtDetail.Load(reader);
 
                     db.CloseDataReader(reader);
@@ -338,13 +405,17 @@ namespace BTPNS.Scheduler
 
                     //new SharePointHelper().UploadFileToDocLib(file_output_url, "CIF");
                     #region Email List
-                    EmailTxt eml = new EmailTxt();
-                    eml.Email = util.GetStringValue(row, "GeneratedBy");
-                    eml.file_attachment = file_output_url;
-                    eml.NomorDraft = NomorDraft;
-                    list.Add(eml);
-
+                    if (dtDetail.Rows.Count > 0)
+                    {
+                        EmailTxt eml = new EmailTxt();
+                        eml.Email = util.GetStringValue(row, "GeneratedBy");
+                        eml.file_attachment = file_output_url;
+                        eml.NomorDraft = NomorDraft;
+                        list.Add(eml);
+                        Console.WriteLine("Generate Txt CIF " + txt_file_name + " Done");
+                    }
                     #endregion
+                    i++;
                 }
 
 
