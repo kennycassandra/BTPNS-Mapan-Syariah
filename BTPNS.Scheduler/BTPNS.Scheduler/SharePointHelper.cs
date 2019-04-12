@@ -6,14 +6,85 @@ using System.Threading.Tasks;
 using Microsoft.SharePoint;
 using System.Configuration;
 using System.IO;
+using Microsoft.SharePoint.Client;
 
 namespace BTPNS.Scheduler
 {
     public class SharePointHelper
     {
+        public string UploadFileToDocLib(string OutputFolder, string SelectedfilePath, string DocLib)
+        {
+            try
+            {
+                string fileUrl = "";
+                string UrlSPOnPrem = ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString();
+                ClientContext context = new ClientContext(UrlSPOnPrem);
+                using (var fs = new FileStream(SelectedfilePath, FileMode.Open))
+                {
+                    var fi = new FileInfo(SelectedfilePath);
+                    var list = context.Web.Lists.GetByTitle(DocLib);
+                    context.Load(list.RootFolder);
+                    context.ExecuteQuery();
+                    fileUrl = String.Format("{0}/{1}", list.RootFolder.ServerRelativeUrl, fi.Name);
+
+                    Microsoft.SharePoint.Client.File.SaveBinaryDirect(context, fileUrl, fs, true);
+                }
+                return UrlSPOnPrem + fileUrl;
+            }
+            catch (Exception ex)
+            {
+                new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "UploadFileToDocLib - " + DocLib);
+                return "";
+            }
+        }
+
         public bool ListExists(SPWeb web, string listName)
         {
             return web.Lists.Cast<SPList>().Any(list => string.Equals(list.Title, listName));
+        }
+
+        public bool ListExistsNew(ClientContext cl, string listName)
+        {
+            ListCollection listCollection = cl.Web.Lists;
+            cl.Load(listCollection, lists => lists.Include(list => list.Title).Where(list => list.Title == listName));
+            cl.ExecuteQuery();
+
+            if (listCollection.Count > 0)
+            {
+                Console.WriteLine("List " + listName + " already exists");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("List " + listName + " not exists");
+                return false;
+            }
+        }
+
+        public void CreateDocLib2(string OutputFolder, string DocLib, string Desc)
+        {
+            try
+            {
+                ClientContext cl = new ClientContext(ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString());
+                if (!ListExistsNew(cl, DocLib))
+                {
+                    using (ClientContext clientCTX = new ClientContext(ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString()))
+                    {
+                        ListCreationInformation lci = new ListCreationInformation();
+                        lci.Description = Desc;
+                        lci.Title = DocLib;
+                        lci.TemplateType = 101;
+                        List newLib = clientCTX.Web.Lists.Add(lci);
+                        clientCTX.Load(newLib);
+                        clientCTX.ExecuteQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "CreateDocLib2 - " + DocLib);
+            }
         }
         public void CreateDocLib(string OutputFolder, string DocLib, string Desc)
         {
@@ -44,6 +115,8 @@ namespace BTPNS.Scheduler
             }
           
         }
+
+        /*
         public string UploadFileToDocLib(string OutputFolder, string SelectedfilePath, string DocLib)
         {
             try
@@ -61,7 +134,7 @@ namespace BTPNS.Scheduler
 
                         // Prepare to upload
                         string fileName = System.IO.Path.GetFileName(SelectedfilePath);
-                        FileStream fileStream = File.OpenRead(SelectedfilePath);
+                        FileStream fileStream = System.IO.File.OpenRead(SelectedfilePath);
 
                         //Check the existing File out if the Library Requires CheckOut
                         if (libFolder.RequiresCheckout)
@@ -99,5 +172,6 @@ namespace BTPNS.Scheduler
             }
 
         }
+        */
     }
 }

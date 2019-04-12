@@ -3,3 +3,11 @@ Pembiayaan
 AP3R
 Persetujuan_Pembiayaan
 SMS_Notification
+
+
+Update 4Apr2019
+
+MasterGrade tambah kolom AngsuranFrom dan AngsuranTo
+MasterDeskripsiUsaha
+MasterAlamatMPros
+Log_GeneratePDF tambah kolom NomorDraft

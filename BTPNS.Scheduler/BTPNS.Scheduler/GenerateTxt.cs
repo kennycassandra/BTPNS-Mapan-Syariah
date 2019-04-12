@@ -14,6 +14,7 @@ namespace BTPNS.Scheduler
         public string Email { get; set; }
         public string NomorDraft { get; set; }
         public string file_attachment { get; set; }
+        public string BodyContent { get; set; }
     }
     public class GenerateTxt
     {
@@ -68,13 +69,14 @@ namespace BTPNS.Scheduler
                 string Agent = "";
                 string Tgl = DateTime.Now.ToString("yyyyMMdd");
                 string Waktu = DateTime.Now.ToString("HHmmss");
+                List<string> listDraft = new List<string>();
                 foreach (DataRow row in dt.Rows)
                 {
                     string NomorDraft = util.GetStringValue(row, "NomorDraft");
                     if (i == 0)
                     {
                         Agent = util.GetStringValue(row, "GeneratedBy");
-                        txt_file_name = "CIF_" + Tgl + "_" +
+                        txt_file_name = "PEMBIAYAAN_" + Tgl + "_" +
                                     Waktu + "_" + util.GetIntValue(row, "TotalRow").ToString() + ".txt";
                     }
                     else
@@ -83,7 +85,7 @@ namespace BTPNS.Scheduler
                         {
                             Tgl = DateTime.Now.ToString("yyyyMMdd");
                             Waktu = DateTime.Now.ToString("HHmmss");
-                            txt_file_name = "CIF_" + Tgl + "_" +
+                            txt_file_name = "PEMBIAYAAN_" + Tgl + "_" +
                                         Waktu + "_" + util.GetIntValue(row, "TotalRow").ToString() + ".txt";
                         }
                     }
@@ -93,6 +95,7 @@ namespace BTPNS.Scheduler
                     db.cmd.Parameters.Clear();
                     db.AddInParameter(db.cmd, "NomorDraft", NomorDraft);
                     reader = db.cmd.ExecuteReader();
+                    dtDetail = new DataTable();
                     dtDetail.Load(reader);
                     db.CloseDataReader(reader);
                     db.CloseConnection(ref sqlConn);
@@ -101,120 +104,138 @@ namespace BTPNS.Scheduler
                     //string txt_file_name = "PEMBIAYAAN_" + DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + "_" + util.GetStringValue(row, "TotalRow") + ".txt";
                     string file_output_url = OutputFolder + "Output" + "\\TXT\\Pembiayaan\\" + txt_file_name;
 
-                    #region Write Txt
-                    foreach (DataRow r in dtDetail.Rows)
+                    string _draft = listDraft.Find(f => f.ToUpper() == NomorDraft.ToUpper());
+
+                    if (string.IsNullOrEmpty(_draft))
                     {
-                        Officer = util.GetStringValue(row, "GeneratedBy");
-
-                        string Txt = util.GetStringValue(r, "Currency");
-                        using (StreamWriter writer = new StreamWriter(file_output_url, true))
+                        #region Write Txt
+                        foreach (DataRow r in dtDetail.Rows)
                         {
-                            Txt += "|"; // Proposal Date
-                            Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
-                            Txt += "|"; //Maximum Total
-                            Txt += "|" + util.GetStringValue(r, "RencanaCair");
-                            Txt += "|" + util.GetStringValue(r, "ExpiryDate");
-                            Txt += "|"; //Review Frekuency
-                            Txt += "|"; //Liab Group
-                            Txt += "|"; //Notes
-                            Txt += "|"; //Cust Name
-                            Txt += "|" + util.GetStringValue(r, "Currency");
-                            Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
-                            Txt += "|" + util.GetStringValue(r, "RencanaCair");
-                            Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
-                            Txt += "|"; //EXPIRY.DATE
-                            Txt += "|"; //T.GROUP.ID
-                            Txt += "|"; //REVIEW.FREQUENCY
-                            Txt += "|"; //NOTES
-                            Txt += "|"; //ORIENTATION
-                            Txt += "|"; //PRODUCT.CHAR
-                            Txt += "|"; //CLASS.OF.CREDIT
-                            Txt += "|"; //PROJECT.LOCATE
-                            Txt += "|"; // TYPE.OF.USE
-                            Txt += "|"; //ECONOMIC.SECTOR
-                            Txt += "|"; //LOANS.CHARC
-                            Txt += "|"; //LBUS.TYPE.USE
-                            Txt += "|"; //NEW.EXTEND
-                            Txt += "|0"; //Plafon BFR
-                            Txt += "|"; //PLAOB.TYPE
-                            Txt += "|"; //PLAOB.DESC
-                            Txt += "|"; //IA.LOAN.CHARC
-                            Txt += "|"; //PK.NUMBER
-                            Txt += "|"; //FIRST.PK.DATE
-                            Txt += "|"; //LAST.PK.NUMBER
-                            Txt += "|"; //LAST.PK.DATE
-                            Txt += "|"; //BMPK.DIF.VALUE
-                            Txt += "|"; //BMPK.DIF.PRCTG
-                            Txt += "|"; //BMPK.NOTE
-                            Txt += "|"; //CATEGORY.BR
-                            Txt += "|"; //SHORT.DESC
-                            Txt += "|"; //DESCRIPTION
-                            Txt += "|" + util.GetStringValue(r, "CIF");
-                            Txt += "|" + util.GetStringValue(r, "Currency");
-                            Txt += "|"; // CUST.LIMIT
-                            Txt += "|"; //SUPPLIER.ID
-                            Txt += "|"; //SUPPLIER.NAME
-                            Txt += "|"; //SUPPLIER.ACCT
-                            Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
-                            Txt += "|" + util.GetStringValue(r, "DownPayment");
-                            Txt += "|" + util.GetStringValue(r, "AssetQty");
-                            Txt += "|"; //HPP ASSET
-                            Txt += "|" + util.GetStringValue(r, "CIF");
-                            Txt += "|" + util.GetStringValue(r, "Currency");
-                            Txt += "|" + util.GetStringValue(r, "ProdType");
-                            Txt += "|"; //IAR.REF
-                            Txt += "|"; //AMOUNT
-                            Txt += "|"; //LIMIT.REFERENCE
-                            Txt += "|" + util.GetStringValue(r, "TenorRekomendasi");
-                            Txt += "|" + util.GetStringValue(r, "SchdType");
-                            Txt += "|"; // FILE.NAME
-                            Txt += "|"; //CUST.ACCT
-                            Txt += "|"; //PRIN.LIQ.ACCT
-                            Txt += "|"; //INT.LIQ.ACCT
-                            Txt += "|" + util.GetStringValue(r, "WakalahFlag");
-                            Txt += "|" + util.GetStringValue(r, "SingleMulti");
-                            Txt += "|"; // TIER.PERIOD
-                            Txt += "|"; // TIER.RATE
-                            Txt += "|" + util.GetStringValue(r, "MarginRekomendasi");
-                            Txt += "|"; // GRC.DURATION
-                            Txt += "|"; // MRG.AMT
-                            Txt += "|"; // CHARGE.CODE
-                            Txt += "|"; // CHRG.AMT
-                            Txt += "|"; // TOT.CHRG.AMT
-                            Txt += "|"; // CHRG.LIQ.ACCT
-                            Txt += "|" + util.GetStringValue(r, "AGNFlag");
+                            Officer = util.GetStringValue(row, "GeneratedBy");
 
-                            Txt += "|"; //Coll Code
-                            Txt += "|"; //Percent Alloc
-                            Txt += "|" + util.GetStringValue(r, "StatusPembiaya");
-                            Txt += "|" + util.GetStringValue(r, "ClassOfCredit");
-                            Txt += "|" + util.GetStringValue(r, "PortfolioCateg");
+                            string Txt = "LIMIT-INDUK*" + util.GetStringValue(r, "RencanaCair");
 
-                            Txt += "|"; //CONDITION
-                            Txt += "|"; //CONDITION.DATE
-                            Txt += "|"; //FREQ.INS
-                            Txt += "|"; //PLAOB.DESC
-                            Txt += "|"; //DEBTOR.PROB
+                            using (StreamWriter writer = new StreamWriter(file_output_url, true))
+                            {
+                                Txt += "-" + util.GetStringValue(r, "CIF") + "-" + util.GetStringValue(r, "NomorAkad");
+                                Txt += "|" + util.GetStringValue(r, "Currency");
+                                Txt += "|"; // Proposal Date
+                                Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
+                                Txt += "|"; //Maximum Total
+                                Txt += "|" + util.GetStringValue(r, "RencanaCair");
+                                Txt += "|" + util.GetStringValue(r, "ExpiryDate");
+                                Txt += "|"; //Review Frekuency
+                                Txt += "|"; //Liab Group
+                                Txt += "|"; //Notes
+                                Txt += "||LIMIT-ANAK*" + util.GetStringValue(r, "RencanaCair") + "-" + util.GetStringValue(r, "CIF") + "-" + util.GetStringValue(r, "NomorAkad");
+                                Txt += "|" + util.GetStringValue(r, "NamaSesuaiKTP"); //Cust Name
+                                Txt += "|" + util.GetStringValue(r, "Currency");
+                                Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
+                                Txt += "|" + util.GetStringValue(r, "RencanaCair");
+                                Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
+                                Txt += "|"; //+ util.GetStringValue(r, "JatuhTempo");
+                                Txt += "|"; //T.GROUP.ID
+                                Txt += "|"; //REVIEW.FREQUENCY
+                                Txt += "|"; //NOTES
+                                //Txt += "|"; //+ util.GetStringValue(r, "Orientation"); //ORIENTATION
+                                Txt += "|"; //+ util.GetStringValue(r, "ProductChar"); //PRODUCT.CHAR
+                                Txt += "|"; //+ util.GetStringValue(r, "ClassOfCredit"); //CLASS.OF.CREDIT
+                                Txt += "|"; //+ util.GetStringValue(r, "ProjectLocate"); //PROJECT.LOCATE
+                                Txt += "|"; //+ util.GetStringValue(r, "TypeOfUse"); // TYPE.OF.USE
+                                Txt += "|"; //+ util.GetStringValue(r, "KodeSektorEkonomi"); //ECONOMIC.SECTOR
+                                Txt += "|";// + util.GetStringValue(r, "LoansChar"); //LOANS.CHARC
+                                Txt += "|";// + util.GetStringValue(r, "LBUSTypeUse"); //LBUS.TYPE.USE
+                                Txt += "|";// + util.GetStringValue(r, "NewExtend"); //NEW.EXTEND
+                                Txt += "|" + util.GetStringValue(r, "PlafonBFR"); //Plafon BFR
+                                Txt += "|"; //PLAOB.TYPE
+                                Txt += "|"; //PLAOB.DESC
+                                Txt += "|"; //IA.LOAN.CHARC
+                                Txt += "|"; //PK.NUMBER
+                                Txt += "|";// + util.GetStringValue(r, "RencanaCair"); //FIRST.PK.DATE
+                                Txt += "|"; //LAST.PK.NUMBER
+                                Txt += "|"; //LAST.PK.DATE
+                                Txt += "|"; //BMPK.DIF.VALUE
+                                Txt += "|"; //BMPK.DIF.PRCTG
+                                Txt += "|"; //BMPK.NOTE
+                                Txt += "|"; //CATEGORY.BR
 
-                            Txt += "|" + util.GetStringValue(r, "PendapatanBersihUsaha");
-                            Txt += "|"; //STAGNANT.DATE
-                            Txt += "|"; //STAGNANT.REASON
-                            Txt += "|" + util.GetStringValue(r, "TypeOfUse");
-                            Txt += "|" + util.GetStringValue(r, "LoansChar");
-                            Txt += "|" + util.GetStringValue(r, "RencanaCair");
-                            Txt += "|" + util.GetStringValue(r, "JatuhTempo");
-                            Txt += "|" + util.GetStringValue(r, "NomorAkad");
-                            Txt += "|" + util.GetStringValue(r, "NomorAkad");
-                            Txt += "|" + util.GetStringValue(r, "Dati2");
-                            Txt += "|";
-                            Txt += "|";
-                            Txt += "|" + util.GetStringValue(r, "InstDate");
+                                /*----------------------------------------*/
+                                Txt += "|ASET-REG*" + util.GetStringValue(r, "RencanaCair") + "-" + util.GetStringValue(r, "CIF") + "-" + util.GetStringValue(r, "NomorAkad");
+                                Txt += "|"; //SHORT.DESC
+                                Txt += "|"; //DESCRIPTION
+                                Txt += "|" + util.GetStringValue(r, "CIF");
+                                Txt += "|" + util.GetStringValue(r, "Currency");
+                                Txt += "|"; // CUST.LIMIT
+                                Txt += "|"; //SUPPLIER.ID
+                                Txt += "|"; //SUPPLIER.NAME
+                                Txt += "|"; //SUPPLIER.ACCT
+                                Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
+                                Txt += "|" + util.GetIntValue(r, "DownPayment").ToString();
+                                Txt += "|" + util.GetStringValue(r, "AssetQty");
+                                Txt += "|"; //HPP ASSET
 
-                            writer.WriteLine(Txt);
+                                /*------------------------------------------*/
+                                Txt += "|PEMBIAYAAN*" + util.GetStringValue(r, "RencanaCair") + "-" + util.GetStringValue(r, "CIF") + "-" + util.GetStringValue(r, "NomorAkad");
+                                Txt += "|" + util.GetStringValue(r, "CIF");
+                                Txt += "|" + util.GetStringValue(r, "Currency");
+                                Txt += "|" + util.GetStringValue(r, "ProdType");
+                                Txt += "|"; //IAR.REF
+                                Txt += "|"; //AMOUNT
+                                Txt += "|"; //LIMIT.REFERENCE
+                                Txt += "|" + util.GetStringValue(r, "TenorRekomendasi");
+                                Txt += "|" + util.GetStringValue(r, "SchdType");
+                                Txt += "|"; // FILE.NAME
+                                Txt += "|"; //CUST.ACCT
+                                Txt += "|"; //PRIN.LIQ.ACCT
+                                Txt += "|"; //INT.LIQ.ACCT
+                                Txt += "|" + util.GetStringValue(r, "WakalahFlag");
+                                Txt += "|" + util.GetStringValue(r, "SingleMulti");
+                                Txt += "|"; // TIER.PERIOD
+                                Txt += "|"; // TIER.RATE
+                                Txt += "|" + util.GetStringValue(r, "MarginRekomendasi");
+                                Txt += "|"; // GRC.DURATION
+                                Txt += "|"; // MRG.AMT
+                                Txt += "|"; //+ util.GetStringValue(r, "ChargeCode"); // CHARGE.CODE
+                                Txt += "|"; // CHRG.AMT
+                                Txt += "|"; // TOT.CHRG.AMT
+                                Txt += "|"; // CHRG.LIQ.ACCT
+                                Txt += "|" + util.GetStringValue(r, "AGNFlag");
 
+                                Txt += "|"; //Coll Code
+                                Txt += "|"; //Percent Alloc
+                                Txt += "|" + util.GetStringValue(r, "StatusPembiaya");
+                                Txt += "|" + util.GetStringValue(r, "ClassOfCredit");
+                                Txt += "|" + util.GetStringValue(r, "PortfolioCateg");
+
+                                Txt += "|"; //CONDITION
+                                Txt += "|"; //CONDITION.DATE
+                                Txt += "|"; //FREQ.INS
+                                Txt += "|"; //PLAOB.DESC
+                                Txt += "|"; //DEBTOR.PROB
+
+                                Txt += "|" + util.GetStringValue(r, "TotalPendapatanPenjualan"); //GAS.CUS
+                                Txt += "|"; //STAGNANT.DATE
+                                Txt += "|"; //STAGNANT.REASON
+                                Txt += "|"; //SECTOR ECONOMY
+                                Txt += "|" + util.GetStringValue(r, "TypeOfUse");
+                                Txt += "|" + util.GetStringValue(r, "LoansChar");
+                                Txt += "|" + util.GetStringValue(r, "RencanaCair");
+                                Txt += "|" + util.GetStringValue(r, "JatuhTempo");
+                                Txt += "|" + util.GetStringValue(r, "NomorAkad");
+                                Txt += "|" + util.GetStringValue(r, "NomorAkad");
+                                Txt += "|" + util.GetStringValue(r, "Dati2");
+                                Txt += "|";
+                                Txt += "|";
+                                Txt += "|" + util.GetStringValue(r, "InstDate");
+
+                                writer.WriteLine(Txt);
+
+                            }
                         }
+                        #endregion
                     }
-                    #endregion
+                    listDraft.Add(NomorDraft);
+                    string Url_Pembiayaan = new SharePointHelper().UploadFileToDocLib(OutputFolder, file_output_url, "Pembiayaan");
 
                     //new SharePointHelper().UploadFileToDocLib(file_output_url, "Pembiayaan");
                     if (dtDetail.Rows.Count > 0)
@@ -223,6 +244,7 @@ namespace BTPNS.Scheduler
                         eml.Email = util.GetStringValue(row, "GeneratedBy");
                         eml.file_attachment = file_output_url;
                         eml.NomorDraft = NomorDraft;
+                        eml.BodyContent = txt_file_name + " - " + Url_Pembiayaan;
                         list.Add(eml);
                     }
                     Console.WriteLine("Generate Txt Pembiayaan " + txt_file_name + " Done");
@@ -300,7 +322,7 @@ namespace BTPNS.Scheduler
 
                         using (StreamWriter writer = new StreamWriter(file_output_url, true))
                         {
-                            string Txt = "|" + util.GetStringValue(rowDetail, "CIF");
+                            string Txt = "CIF-IDV*" + util.GetStringValue(rowDetail, "JatuhTempo") + "-" + util.GetStringValue(rowDetail, "CIF") + "-" +util.GetStringValue(rowDetail, "NomorAkad") + "||" + util.GetStringValue(rowDetail, "CIF");
                             Txt += "|" + util.GetStringValue(rowDetail, "MNEMONIC");
                             Txt += "|" + util.GetStringValue(rowDetail, "CUSTTITLE1");
                             Txt += "|" + util.GetStringValue(rowDetail, "NamaSesuaiKTP");
@@ -341,7 +363,7 @@ namespace BTPNS.Scheduler
                             Txt += "|" + util.GetStringValue(rowDetail, "DISTRICT");
                             Txt += "|" + util.GetStringValue(rowDetail, "POSTCODE");
                             Txt += "|" + util.GetStringValue(rowDetail, "Pekerjaan");
-                            Txt += "|" + util.GetStringValue(rowDetail, "EmploymentStatus");
+                            Txt += "|" + util.GetStringValue(rowDetail, "EmployementStatus");
                             Txt += "|" + util.GetStringValue(rowDetail, "OCCUPATION");
                             Txt += "|" + util.GetStringValue(rowDetail, "KodeSektorEkonomi");
                             Txt += "|" + util.GetStringValue(rowDetail, "EMPLOYERSName");
@@ -378,9 +400,10 @@ namespace BTPNS.Scheduler
                             Txt += "|" + util.GetStringValue(rowDetail, "LBU_Cust_Type");
                             Txt += "|" + util.GetStringValue(rowDetail, "CustomerRating");
                             Txt += "|" + util.GetStringValue(rowDetail, "CustomerSince");
+                            Txt += "|"; //CU Rate Date
+                            Txt += "|"; //LBBU Cust Type
                             Txt += "|" + util.GetStringValue(rowDetail, "UploadCompany");
                             Txt += "|" + util.GetStringValue(rowDetail, "RESStatus");
-
                             Txt += "|" + util.GetStringValue(rowDetail, "RESYEAR") + "|" + util.GetStringValue(rowDetail, "RESMONTH");
                             Txt += "|" + util.GetStringValue(rowDetail, "TotalEmployee") + "|" + util.GetStringValue(rowDetail, "RelatiBank");
                             Txt += "|" + util.GetStringValue(rowDetail, "TotalLiability") + "|" + util.GetStringValue(rowDetail, "AttStatus");
@@ -403,6 +426,8 @@ namespace BTPNS.Scheduler
                     }
                     #endregion
 
+                    string Url_CIF = new SharePointHelper().UploadFileToDocLib(OutputFolder, file_output_url, "CIF");
+
                     //new SharePointHelper().UploadFileToDocLib(file_output_url, "CIF");
                     #region Email List
                     if (dtDetail.Rows.Count > 0)
@@ -411,6 +436,7 @@ namespace BTPNS.Scheduler
                         eml.Email = util.GetStringValue(row, "GeneratedBy");
                         eml.file_attachment = file_output_url;
                         eml.NomorDraft = NomorDraft;
+                        eml.BodyContent = txt_file_name + " - " + Url_CIF;
                         list.Add(eml);
                         Console.WriteLine("Generate Txt CIF " + txt_file_name + " Done");
                     }
@@ -436,32 +462,22 @@ namespace BTPNS.Scheduler
             int i = 0;
             string Email = "";
             db.OpenConnection(ref sqlConn);
+
+            List<string> listAttach = new List<string>();
+            listAttach.Add(list.FirstOrDefault().file_attachment);
+            Email = list.FirstOrDefault().Email;
+            new MailHelper().email_send(listAttach, "Generate Txt " + GenerateType, Email, list.FirstOrDefault().BodyContent);
+
             foreach (EmailTxt e in list)
             {
-                List<string> listAttach = new List<string>();
-                if (i == 0)
-                {
-                    listAttach.Add(e.file_attachment);
-                    Email = e.Email;
-                    new MailHelper().email_send(listAttach, "Generate Txt " + GenerateType, e.Email);
-                }
-                else
-                {
-                    if (Email != e.Email)
-                    {
-                        listAttach = new List<string>();
-                        listAttach.Add(e.file_attachment);
-                        Email = e.Email;
-                        new MailHelper().email_send(listAttach, "Generate Txt " + GenerateType, e.Email);
-                    }
-                }
+
                 db.cmd.CommandText = "[usp_Generate_CIF_Pembiayaan_Update]";
                 db.cmd.CommandType = CommandType.StoredProcedure;
                 db.cmd.Parameters.Clear();
 
                 db.AddInParameter(db.cmd, "NomorDraft", e.NomorDraft);
                 db.AddInParameter(db.cmd, "GenerateType", GenerateType);
-                db.AddInParameter(db.cmd, "SharePointURL", "");
+                db.AddInParameter(db.cmd, "SharePointURL", e.BodyContent);
 
                 db.cmd.ExecuteNonQuery();
             }

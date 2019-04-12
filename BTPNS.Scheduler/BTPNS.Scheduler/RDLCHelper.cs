@@ -1,6 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
@@ -37,12 +38,21 @@ namespace BTPNS.Scheduler
                 {
                     string OfficerMail = util.GetStringValue(row, "OfficerEmail");
                     string NomorAkad = util.GetStringValue(row, "NomorAkad");
-                    string output1 = GenerateAP3RPDF(OutputFolder, "AP3R.rdlc", "AP3R_M-Prospera_No_APPID " + NomorAkad, NomorAkad);
-                    string output2 = GeneratePersetujuanPembiayaan(OutputFolder, "PersetujuanPembiayaan.rdlc", NomorAkad, "PP_M-Prospera_No_APPID" + NomorAkad);
+                    string NomorDraft = util.GetStringValue(row, "NomorDraft");
+                    string output1 = GenerateAP3RPDF(OutputFolder, "AP3R.rdlc", "AP3R_MapanSyariah_" + NomorAkad, NomorAkad);
+                    string output2 = GeneratePersetujuanPembiayaan(OutputFolder, "PersetujuanPembiayaan.rdlc", NomorAkad, "PP_MapanSyariah-" + NomorAkad);
+                    string CIF = util.GetStringValue(row, "CIF");
+                    string Url_AP3R = new SharePointHelper().UploadFileToDocLib(OutputFolder, output1, "AP3R");
+                    string Url_PP = new SharePointHelper().UploadFileToDocLib(OutputFolder, output2, "Persetujuan_Pembiayaan");
+
 
                     Console.WriteLine("Nomor Akad : {0}", NomorAkad);
                     Console.WriteLine("Output1 : {0}", output1);
                     Console.WriteLine("Output2 : {0}", output2);
+
+                    Console.WriteLine("Url AP3R : {0}", Url_AP3R);
+                    Console.WriteLine("Url Persetujuan Pembiayaan : {0}", Url_PP);
+
 
                     db.OpenConnection(ref sqlConn);
 
@@ -51,8 +61,9 @@ namespace BTPNS.Scheduler
                     db.cmd.Parameters.Clear();
 
                     db.AddInParameter(db.cmd, "NomorAkad", NomorAkad);
-                    db.AddInParameter(db.cmd, "OutputName1", output1);
-                    db.AddInParameter(db.cmd, "OutputName2", output2);
+                    db.AddInParameter(db.cmd, "OutputName1", Url_AP3R);
+                    db.AddInParameter(db.cmd, "OutputName2", Url_PP);
+                    db.AddInParameter(db.cmd, "NomorDraft", NomorDraft);
 
                     db.cmd.ExecuteNonQuery();
                     db.CloseConnection(ref sqlConn);
@@ -61,7 +72,7 @@ namespace BTPNS.Scheduler
                     listAttach.Add(output1);
                     listAttach.Add(output2);
 
-                    new MailHelper().email_send(listAttach, "AP3R & Persetujuan Pembiayaan", OfficerMail);
+                    new MailHelper().email_send(listAttach, "AP3R & Persetujuan Pembiayaan -" + CIF + "-" + NomorAkad, OfficerMail);
 
                     Console.WriteLine("Generate PDF AP3R & Form Persetujuan Pembiayaan Nomor Akad {0} Done", NomorAkad);
 
@@ -101,12 +112,12 @@ namespace BTPNS.Scheduler
                     string TextSMS = "";
                     NoRek = util.GetStringValue(row, "NomorRekening");
                     NamaNasabah = util.GetStringValue(row, "NamaNasabah");
-                    NoHp = util.GetStringValue(row, "NoHp");
+                    NoHp = util.GetStringValue(row, "NoHp").Replace("-","");
                     NomorAkad = util.GetStringValue(row, "NomorAkad");
                     //20181127|MMS|0812345678|Assalaamu'alaikum. Rekening tabungan Ibu KISWANINGSIH sudah diinput, dg no rek 1234567890. Mohon segera informasikan pada nasabah jika pembiayaan sdh disetujui
                     using (StreamWriter writer = new StreamWriter(file_output_url, true))
                     {
-                        TextSMS = "Assalaamu'alaikum. Rekening tabungan Bpk/Ibu " + NamaNasabah + " sudah diinput, dgn no rek " + NoRek + ". Mohon segera informasikan pada nasabah jika pembiayaan sdh disetujui";
+                        TextSMS = "Assalaamu'alaikum. Dokumen Pembiayaan Bpk/Ibu " + NamaNasabah + " telah kami terima dan segera kami proses. Mohon tunggu kabar selanjutnya dari petugas kami. Terima Kasih.";
                         writer.WriteLine(DateTime.Now.ToString("yyyyMMdd") + "|" + "NASABAH" + "|" + NoHp + "|" + TextSMS);
                     }
                     string Url = new SharePointHelper().UploadFileToDocLib(OutputFolder, file_output_url, "SMS_Notification");
@@ -123,8 +134,8 @@ namespace BTPNS.Scheduler
                 }
                 db.CloseConnection(ref sqlConn, true);
 
+                if (dt.Rows.Count > 0) Console.WriteLine("Generate SMS Done");
 
-                Console.WriteLine("Generate SMS Done");
                 return file_output_url;
 
             }
@@ -263,7 +274,7 @@ namespace BTPNS.Scheduler
                 Byte[] mybytes = report.Render("PDF", null,
                         out extension, out encoding,
                         out mimeType, out streams, out warnings); //for exporting to PDF  
-                string file_output_url = OutputFolder + "AP3R\\" + FileName + ".pdf";
+                string file_output_url = OutputFolder + "\\Output\\AP3R\\" + FileName + ".pdf";
 
                 using (FileStream fs = File.Create(file_output_url))
                 {
@@ -337,32 +348,35 @@ namespace BTPNS.Scheduler
                     }
                     i++;
                 }
-
-                #region RDLC
                 string FileName = "SummaryStatusReport_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
-                string extension;
-                string encoding;
-                string mimeType;
-                string[] streams;
-                Warning[] warnings;
-
-                LocalReport report = new LocalReport();
-                report.ReportPath = OutputFolder + "RDLC" + "\\SummaryStatusMapanSyariah.rdlc";
-                ReportDataSource rds = new ReportDataSource();
-                rds.Name = "SummaryStatus_DS";//This refers to the dataset name in the RDLC file  
-                rds.Value = dtRDLC;
-                report.DataSources.Add(rds);
-
-                Byte[] mybytes = report.Render("Excel", null,
-                        out extension, out encoding,
-                        out mimeType, out streams, out warnings); //for exporting to PDF  
-                string file_output_url = OutputFolder + "Output" + "\\Daily\\" + FileName;
-
-                using (FileStream fs = File.Create(file_output_url))
+                string file_output_url = "";
+                if (dt.Rows.Count > 0)
                 {
-                    fs.Write(mybytes, 0, mybytes.Length);
+                    #region RDLC
+                    string extension;
+                    string encoding;
+                    string mimeType;
+                    string[] streams;
+                    Warning[] warnings;
+
+                    LocalReport report = new LocalReport();
+                    report.ReportPath = OutputFolder + "RDLC" + "\\SummaryStatusMapanSyariah.rdlc";
+                    ReportDataSource rds = new ReportDataSource();
+                    rds.Name = "SummaryStatus_DS";//This refers to the dataset name in the RDLC file  
+                    rds.Value = dtRDLC;
+                    report.DataSources.Add(rds);
+
+                    Byte[] mybytes = report.Render("Excel", null,
+                            out extension, out encoding,
+                            out mimeType, out streams, out warnings); //for exporting to PDF  
+                    file_output_url = OutputFolder + "Output" + "\\Daily\\" + FileName;
+
+                    using (FileStream fs = File.Create(file_output_url))
+                    {
+                        fs.Write(mybytes, 0, mybytes.Length);
+                    }
+                    #endregion
                 }
-                #endregion
 
                 #region Send Email
                 if (dt.Rows.Count > 0)
@@ -381,7 +395,10 @@ namespace BTPNS.Scheduler
                 db.CloseConnection(ref sqlConn);
                 #endregion
 
-                Console.WriteLine("GenerateExcelSummaryReport_Detail1 Done");
+                if (dt.Rows.Count > 0)
+                {
+                    Console.WriteLine("GenerateExcelSummaryReport_Detail1 Done");
+                }
             }
             catch (Exception ex)
             {
@@ -427,6 +444,8 @@ namespace BTPNS.Scheduler
                 dtRDLC.Columns.Add("StatusPengajuanNasabah", typeof(string));
                 dtRDLC.Columns.Add("EmailSend", typeof(int));
                 dtRDLC.Columns.Add("RequestDate", typeof(DateTime));
+                dtRDLC.Columns.Add("GenerateCIFBy", typeof(string));
+                dtRDLC.Columns.Add("GeneratePembiayaanBy", typeof(string));
 
                 #endregion
 
@@ -454,38 +473,42 @@ namespace BTPNS.Scheduler
                     i++;
                 }
 
-                #region RDLC
-                string FileName = "DetailStatusReport_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
-                string extension;
-                string encoding;
-                string mimeType;
-                string[] streams;
-                Warning[] warnings;
 
-                LocalReport report = new LocalReport();
-                report.ReportPath = OutputFolder + "RDLC" + "\\DetailReportMapanSyariah.rdlc";
-                ReportDataSource rds = new ReportDataSource();
-                rds.Name = "DetailReport_DS";
-                rds.Value = dtRDLC;
-                report.DataSources.Add(rds);
-
-                Byte[] mybytes = report.Render("Excel", null,
-                        out extension, out encoding,
-                        out mimeType, out streams, out warnings); //for exporting to PDF  
-                string file_output_url = OutputFolder + "Output" + "\\Daily\\" + FileName;
-
-                using (FileStream fs = File.Create(file_output_url))
+                string FileName = "DetailStatusMapanSyariahReport_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
+                string file_output_url = "";
+                if (dt.Rows.Count > 0)
                 {
-                    fs.Write(mybytes, 0, mybytes.Length);
-                }
-                #endregion
+                    #region RDLC
+                    string extension;
+                    string encoding;
+                    string mimeType;
+                    string[] streams;
+                    Warning[] warnings;
 
+                    LocalReport report = new LocalReport();
+                    report.ReportPath = OutputFolder + "RDLC" + "\\DetailStatusReportMapanSyariah.rdlc";
+                    ReportDataSource rds = new ReportDataSource();
+                    rds.Name = "DetailReport_DS";
+                    rds.Value = dtRDLC;
+                    report.DataSources.Add(rds);
+
+                    Byte[] mybytes = report.Render("Excel", null,
+                            out extension, out encoding,
+                            out mimeType, out streams, out warnings); //for exporting to PDF  
+                    file_output_url = OutputFolder + "Output" + "\\Daily\\" + FileName;
+
+                    using (FileStream fs = File.Create(file_output_url))
+                    {
+                        fs.Write(mybytes, 0, mybytes.Length);
+                    }
+                    #endregion
+                }
                 #region Send Email
                 if (dt.Rows.Count > 0)
                 {
                     List<string> list = new List<string>();
                     list.Add(file_output_url);
-                    new MailHelper().email_send(list, "Detail Report Status Mapan Syariah", OfficerEmail);
+                    new MailHelper().email_send(list, "Detail Status Mapan Syariah Report", OfficerEmail);
                 }
                 #endregion
 
@@ -571,38 +594,42 @@ namespace BTPNS.Scheduler
                     i++;
                 }
 
-                #region RDLC
-                string FileName = "DetailStatusReport_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
-                string extension;
-                string encoding;
-                string mimeType;
-                string[] streams;
-                Warning[] warnings;
-
-                LocalReport report = new LocalReport();
-                report.ReportPath = OutputFolder + "RDLC" + "\\DetailStatusMapanSyariah.rdlc";
-                ReportDataSource rds = new ReportDataSource();
-                rds.Name = "DetailStatus_DS";
-                rds.Value = dtRDLC;
-                report.DataSources.Add(rds);
-
-                Byte[] mybytes = report.Render("Excel", null,
-                        out extension, out encoding,
-                        out mimeType, out streams, out warnings); //for exporting to PDF  
+                string FileName = "DetailSummaryStatusMapanSyariahReport_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
                 string file_output_url = OutputFolder + "Output" + "\\Daily\\" + FileName;
 
-                using (FileStream fs = File.Create(file_output_url))
+                if (dt.Rows.Count > 0)
                 {
-                    fs.Write(mybytes, 0, mybytes.Length);
+                    #region RDLC
+                    string extension;
+                    string encoding;
+                    string mimeType;
+                    string[] streams;
+                    Warning[] warnings;
+
+                    LocalReport report = new LocalReport();
+                    report.ReportPath = OutputFolder + "RDLC" + "\\DetailSummaryStatusMapanSyariah.rdlc";
+                    ReportDataSource rds = new ReportDataSource();
+                    rds.Name = "DetailStatus_DS";
+                    rds.Value = dtRDLC;
+                    report.DataSources.Add(rds);
+
+                    Byte[] mybytes = report.Render("Excel", null,
+                            out extension, out encoding,
+                            out mimeType, out streams, out warnings); //for exporting to PDF  
+
+                    using (FileStream fs = File.Create(file_output_url))
+                    {
+                        fs.Write(mybytes, 0, mybytes.Length);
+                    }
+                    #endregion
                 }
-                #endregion
 
                 #region Send Email
                 if (dt.Rows.Count > 0)
                 {
                     List<string> list = new List<string>();
                     list.Add(file_output_url);
-                    new MailHelper().email_send(list, "Detail Status Mapan Syariah Report", OfficerEmail);
+                    new MailHelper().email_send(list, "Detail Summary Status Mapan Syariah Report", OfficerEmail);
                 }
                 #endregion
 
@@ -613,8 +640,8 @@ namespace BTPNS.Scheduler
                 db.cmd.ExecuteNonQuery();
                 db.CloseConnection(ref sqlConn);
                 #endregion
+                if (dt.Rows.Count > 0) Console.WriteLine("Generate Excel Summary Report Detail2 Done");
 
-                Console.WriteLine("Generate Excel Summary Report Detail2 Done");
             }
             catch (Exception ex)
             {
@@ -684,28 +711,33 @@ namespace BTPNS.Scheduler
                 }
 
                 #region RDLC
-                string FileName = "LogReport_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
-                string extension;
-                string encoding;
-                string mimeType;
-                string[] streams;
-                Warning[] warnings;
-
-                LocalReport report = new LocalReport();
-                report.ReportPath = OutputFolder + "RDLC" + "\\LogManagementReport.rdlc";
-                ReportDataSource rds = new ReportDataSource();
-                rds.Name = "LogReport_DS";
-                rds.Value = dtRDLC;
-                report.DataSources.Add(rds);
-
-                Byte[] mybytes = report.Render("Excel", null,
-                        out extension, out encoding,
-                        out mimeType, out streams, out warnings); //for exporting to PDF  
-                string file_output_url = OutputFolder + "Output" + "\\Daily\\" + FileName;
-
-                using (FileStream fs = File.Create(file_output_url))
+                string FileName = "";
+                string file_output_url = "";
+                if (dt.Rows.Count > 0)
                 {
-                    fs.Write(mybytes, 0, mybytes.Length);
+                    FileName = "LogReport_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
+                    string extension;
+                    string encoding;
+                    string mimeType;
+                    string[] streams;
+                    Warning[] warnings;
+
+                    LocalReport report = new LocalReport();
+                    report.ReportPath = OutputFolder + "RDLC" + "\\LogManagementReport.rdlc";
+                    ReportDataSource rds = new ReportDataSource();
+                    rds.Name = "LogReport_DS";
+                    rds.Value = dtRDLC;
+                    report.DataSources.Add(rds);
+
+                    Byte[] mybytes = report.Render("Excel", null,
+                            out extension, out encoding,
+                            out mimeType, out streams, out warnings); //for exporting to PDF  
+                    file_output_url = OutputFolder + "Output" + "\\Daily\\" + FileName;
+
+                    using (FileStream fs = File.Create(file_output_url))
+                    {
+                        fs.Write(mybytes, 0, mybytes.Length);
+                    }
                 }
                 #endregion
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BTPNS.Scheduler
 {
-    class MailHelper
+    public class MailHelper
     {
         public void email_send(List<string> file_attachment, string Subject, string MailTo, string BodyContent="")
         {

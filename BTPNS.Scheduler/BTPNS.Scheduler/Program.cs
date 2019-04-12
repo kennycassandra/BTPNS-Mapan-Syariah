@@ -22,6 +22,7 @@ namespace BTPNS.Scheduler
                 Console.WriteLine("SQL Connection String : {0}", ConfigurationManager.ConnectionStrings["cnstr"].ToString());
                 //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
                 Console.WriteLine("Output Location : {0}", OutputFolder);
+                Console.WriteLine("Last Update : {0}", File.GetLastWriteTime(OutputFolder + "BTPNS.Scheduler.exe"));
                 if (TestSendEmail == "1")
                 {
                     new MailHelper().TestSendEmail();
@@ -29,14 +30,23 @@ namespace BTPNS.Scheduler
                     Console.ReadLine();
                     return;
                 }
+
+                new SharePointHelper().CreateDocLib2(OutputFolder, "AP3R", "IF Mapan Syariah Generate PDF");
+                new SharePointHelper().CreateDocLib2(OutputFolder, "CIF", "IF Mapan Syariah Generate PDF");
+                new SharePointHelper().CreateDocLib2(OutputFolder, "Pembiayaan", "IF Mapan Syariah Generate PDF");
+                new SharePointHelper().CreateDocLib2(OutputFolder, "Persetujuan_Pembiayaan", "IF Mapan Syariah Generate PDF");
+                new SharePointHelper().CreateDocLib2(OutputFolder, "SMS_Notification", "IF Mapan Syariah Generate PDF");
+
+
                 new SharePointHelper().CreateDocLib(OutputFolder, "AP3R", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "CIF", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "Pembiayaan", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "Persetujuan_Pembiayaan", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "SMS_Notification", "IF Mapan Syariah Generate PDF");
 
-
+                new CleansingHelper().CleansingSPFiles(OutputFolder);
                 new CleansingHelper().CleansingLocalFiles(OutputFolder);
+
                 new RDLCHelper().GeneratePDF(OutputFolder);
                 new RDLCHelper().GenerateSMS(OutputFolder);
                 new RDLCHelper().GenerateExcelSummaryReport_Detail1(OutputFolder);
@@ -45,7 +55,7 @@ namespace BTPNS.Scheduler
                 new RDLCHelper().GenerateExcelLogReport(OutputFolder);
                 new GenerateTxt().GenerateTxtCIF(OutputFolder);
                 new GenerateTxt().GenerateTxtPembiayaan(OutputFolder);
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(5000);
                 Console.WriteLine("Process Done");
             }
             catch (Exception ex)
