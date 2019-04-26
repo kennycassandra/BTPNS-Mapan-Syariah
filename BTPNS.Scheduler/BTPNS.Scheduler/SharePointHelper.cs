@@ -7,18 +7,38 @@ using Microsoft.SharePoint;
 using System.Configuration;
 using System.IO;
 using Microsoft.SharePoint.Client;
+using System.Security;
 
 namespace BTPNS.Scheduler
 {
     public class SharePointHelper
     {
-        public string UploadFileToDocLib(string OutputFolder, string SelectedfilePath, string DocLib)
+        public ClientContext Auth(string OutputFolder, String uname, String pwd, string siteURL)
+        {
+            ClientContext context = new ClientContext(siteURL);
+            Web web = context.Web;
+            SecureString passWord = new SecureString();
+            foreach (char c in pwd.ToCharArray()) passWord.AppendChar(c);
+            context.Credentials = new SharePointOnlineCredentials(uname, passWord);
+            try
+            {
+                context.Load(web);
+                context.ExecuteQuery();
+                Console.WriteLine("Olla! from " + web.Title + " site");
+                return context;
+            }
+            catch (Exception ex)
+            {
+                new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "Authentication SP On Prem");
+                return null;
+            }
+        }
+        public string UploadFileToDocLibClientSide(string OutputFolder, string SelectedfilePath, string DocLib , ClientContext context)
         {
             try
             {
                 string fileUrl = "";
                 string UrlSPOnPrem = ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString();
-                ClientContext context = new ClientContext(UrlSPOnPrem);
                 using (var fs = new FileStream(SelectedfilePath, FileMode.Open))
                 {
                     var fi = new FileInfo(SelectedfilePath);
@@ -61,14 +81,13 @@ namespace BTPNS.Scheduler
             }
         }
 
-        public void CreateDocLib2(string OutputFolder, string DocLib, string Desc)
+        public void CreateDocLib2(string OutputFolder, string DocLib, string Desc, ClientContext cl)
         {
             try
             {
-                ClientContext cl = new ClientContext(ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString());
                 if (!ListExistsNew(cl, DocLib))
                 {
-                    using (ClientContext clientCTX = new ClientContext(ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString()))
+                    using (ClientContext clientCTX = cl)
                     {
                         ListCreationInformation lci = new ListCreationInformation();
                         lci.Description = Desc;
@@ -116,7 +135,7 @@ namespace BTPNS.Scheduler
           
         }
 
-        /*
+        
         public string UploadFileToDocLib(string OutputFolder, string SelectedfilePath, string DocLib)
         {
             try
@@ -172,6 +191,6 @@ namespace BTPNS.Scheduler
             }
 
         }
-        */
+        
     }
 }

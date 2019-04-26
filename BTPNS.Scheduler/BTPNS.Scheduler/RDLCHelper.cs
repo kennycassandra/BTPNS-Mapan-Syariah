@@ -18,7 +18,7 @@ namespace BTPNS.Scheduler
         SqlDataReader reader = null;
         Utility util = new Utility();
 
-        public void GeneratePDF(string OutputFolder)
+        public void GeneratePDF(string OutputFolder, string SPSite)
         {
             try
             {
@@ -61,8 +61,8 @@ namespace BTPNS.Scheduler
                     db.cmd.Parameters.Clear();
 
                     db.AddInParameter(db.cmd, "NomorAkad", NomorAkad);
-                    db.AddInParameter(db.cmd, "OutputName1", Url_AP3R);
-                    db.AddInParameter(db.cmd, "OutputName2", Url_PP);
+                    db.AddInParameter(db.cmd, "OutputName1", SPSite + Url_AP3R);
+                    db.AddInParameter(db.cmd, "OutputName2", SPSite + Url_PP);
                     db.AddInParameter(db.cmd, "NomorDraft", NomorDraft);
 
                     db.cmd.ExecuteNonQuery();
@@ -72,7 +72,9 @@ namespace BTPNS.Scheduler
                     listAttach.Add(output1);
                     listAttach.Add(output2);
 
-                    new MailHelper().email_send(listAttach, "AP3R & Persetujuan Pembiayaan -" + CIF + "-" + NomorAkad, OfficerMail);
+                    new MailHelper().email_send(listAttach, 
+                        "AP3R & Persetujuan Pembiayaan -" + CIF + "-" + NomorAkad, OfficerMail, 
+                        "AP3R - " + SPSite + Url_AP3R + Environment.NewLine + "Persetujuan Pembiayaan - " + SPSite + Url_PP);
 
                     Console.WriteLine("Generate PDF AP3R & Form Persetujuan Pembiayaan Nomor Akad {0} Done", NomorAkad);
 
@@ -93,7 +95,7 @@ namespace BTPNS.Scheduler
             {
 
                 DataTable dt = new DataTable();
-                string NoRek, NamaNasabah, NoHp, NomorAkad;
+                string NoRek, NamaNasabah, NoHp, NomorAkad, NomorDraft;
                 db.OpenConnection(ref sqlConn);
                 db.cmd.CommandText = "usp_SMS_Notification_Generate";
                 db.cmd.CommandType = CommandType.StoredProcedure;
@@ -114,6 +116,7 @@ namespace BTPNS.Scheduler
                     NamaNasabah = util.GetStringValue(row, "NamaNasabah");
                     NoHp = util.GetStringValue(row, "NoHp").Replace("-","");
                     NomorAkad = util.GetStringValue(row, "NomorAkad");
+                    NomorDraft = util.GetStringValue(row, "NomorDraft");
                     //20181127|MMS|0812345678|Assalaamu'alaikum. Rekening tabungan Ibu KISWANINGSIH sudah diinput, dg no rek 1234567890. Mohon segera informasikan pada nasabah jika pembiayaan sdh disetujui
                     using (StreamWriter writer = new StreamWriter(file_output_url, true))
                     {
@@ -129,6 +132,7 @@ namespace BTPNS.Scheduler
                     db.AddInParameter(db.cmd, "ScriptSMS", TextSMS);
                     db.AddInParameter(db.cmd, "TxtFile", sms_file_name);
                     db.AddInParameter(db.cmd, "SharePointUrl", Url);
+                    db.AddInParameter(db.cmd, "NomorDraft", NomorDraft);
                     db.cmd.ExecuteNonQuery();
 
                 }

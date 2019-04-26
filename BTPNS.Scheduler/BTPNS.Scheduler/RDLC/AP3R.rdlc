@@ -7667,7 +7667,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TotalPendapatanPerBulan.Value</Value>
+                              <Value>=Sum(Fields!TotalPendapatanPenjualan.Value)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>6pt</FontSize>
@@ -12638,6 +12638,10 @@ a. memberikan data/atau menyebarluaskan data pribadi Nasabah kepada pihak lain (
         <Field Name="KodePos_KTP">
           <DataField>KodePos_KTP</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalPendapatanPenjualan">
+          <DataField>TotalPendapatanPenjualan</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

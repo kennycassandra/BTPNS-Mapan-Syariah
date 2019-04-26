@@ -16,7 +16,7 @@ namespace BTPNS.Scheduler
             qry.ViewXml = "<View Scope=\"RecursiveAll\"><Query><Where><Eq><FieldRef Name=\"FSObjType\" /><Value Type=\"Integer\">0</Value></Eq></Where></Query></View>";
             return qry;
         }
-        public void CleansingSPFiles(string OutputFolder)
+        public void CleansingSPFiles(string OutputFolder, Microsoft.SharePoint.Client.ClientContext cl)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace BTPNS.Scheduler
 
                 string UrlSPOnPrem = ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString();
 
-                using (var ctx = new ClientContext(UrlSPOnPrem))
+                using (var ctx = cl)
                 {
 
                     var results = new Dictionary<string, IEnumerable<Microsoft.SharePoint.Client.File>>();

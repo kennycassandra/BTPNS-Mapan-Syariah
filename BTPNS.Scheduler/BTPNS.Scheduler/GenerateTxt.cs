@@ -53,6 +53,7 @@ namespace BTPNS.Scheduler
             DataTable dt = new DataTable();
             DataTable dtDetail = new DataTable();
             List<EmailTxt> list = new List<EmailTxt>();
+            bool Send = false;
             try
             {
                 db.OpenConnection(ref sqlConn);
@@ -118,7 +119,7 @@ namespace BTPNS.Scheduler
                             using (StreamWriter writer = new StreamWriter(file_output_url, true))
                             {
                                 Txt += "-" + util.GetStringValue(r, "CIF") + "-" + util.GetStringValue(r, "NomorAkad");
-                                Txt += "|" + util.GetStringValue(r, "Currency");
+                                Txt += "|" + util.GetStringValue(r, "LimitCurrency");
                                 Txt += "|"; // Proposal Date
                                 Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
                                 Txt += "|"; //Maximum Total
@@ -127,16 +128,18 @@ namespace BTPNS.Scheduler
                                 Txt += "|"; //Review Frekuency
                                 Txt += "|"; //Liab Group
                                 Txt += "|"; //Notes
-                                Txt += "||LIMIT-ANAK*" + util.GetStringValue(r, "RencanaCair") + "-" + util.GetStringValue(r, "CIF") + "-" + util.GetStringValue(r, "NomorAkad");
+                                Txt += "|LIMIT-ANAK*" + util.GetStringValue(r, "RencanaCair") + "-" + util.GetStringValue(r, "CIF") + "-" + util.GetStringValue(r, "NomorAkad");
                                 Txt += "|" + util.GetStringValue(r, "NamaSesuaiKTP"); //Cust Name
-                                Txt += "|" + util.GetStringValue(r, "Currency");
-                                Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
-                                Txt += "|" + util.GetStringValue(r, "RencanaCair");
-                                Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
-                                Txt += "|"; //+ util.GetStringValue(r, "JatuhTempo");
+                                Txt += "|" + util.GetStringValue(r, "LimitCurrency"); //Limit.Currency
+                                Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi"); //Internal.Amount
+                                Txt += "|" + util.GetStringValue(r, "RencanaCair"); //Online.Limit.Date
+                                Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi"); //Maximum.Total
+                                Txt += "|" + util.GetStringValue(r, "JatuhTempo"); //Expiry.Date
                                 Txt += "|"; //T.GROUP.ID
                                 Txt += "|"; //REVIEW.FREQUENCY
                                 Txt += "|"; //NOTES
+                                Txt += "|"; //ORIENTATION
+
                                 //Txt += "|"; //+ util.GetStringValue(r, "Orientation"); //ORIENTATION
                                 Txt += "|"; //+ util.GetStringValue(r, "ProductChar"); //PRODUCT.CHAR
                                 Txt += "|"; //+ util.GetStringValue(r, "ClassOfCredit"); //CLASS.OF.CREDIT
@@ -216,7 +219,7 @@ namespace BTPNS.Scheduler
                                 Txt += "|" + util.GetStringValue(r, "TotalPendapatanPenjualan"); //GAS.CUS
                                 Txt += "|"; //STAGNANT.DATE
                                 Txt += "|"; //STAGNANT.REASON
-                                Txt += "|"; //SECTOR ECONOMY
+                                Txt += "|" + util.GetStringValue(r, "KodeSektorEkonomi"); //SECTOR ECONOMY
                                 Txt += "|" + util.GetStringValue(r, "TypeOfUse");
                                 Txt += "|" + util.GetStringValue(r, "LoansChar");
                                 Txt += "|" + util.GetStringValue(r, "RencanaCair");
@@ -246,10 +249,11 @@ namespace BTPNS.Scheduler
                         eml.NomorDraft = NomorDraft;
                         eml.BodyContent = txt_file_name + " - " + Url_Pembiayaan;
                         list.Add(eml);
+                        Send = true;
                     }
                     Console.WriteLine("Generate Txt Pembiayaan " + txt_file_name + " Done");
                 }
-                EmailSend(list, "Pembiayaan");
+                if(Send) EmailSend(list, "Pembiayaan");
                 return list;
             }
             catch (Exception ex)
@@ -265,6 +269,7 @@ namespace BTPNS.Scheduler
             DataTable dt = new DataTable();
             DataTable dtDetail = new DataTable();
             List<EmailTxt> list = new List<EmailTxt>();
+            bool Send = false;
             try
             {
                 string Tgl = DateTime.Now.ToString("yyyyMMdd");
@@ -438,14 +443,14 @@ namespace BTPNS.Scheduler
                         eml.NomorDraft = NomorDraft;
                         eml.BodyContent = txt_file_name + " - " + Url_CIF;
                         list.Add(eml);
+                        Send = true;
                         Console.WriteLine("Generate Txt CIF " + txt_file_name + " Done");
                     }
                     #endregion
                     i++;
                 }
 
-
-                EmailSend(list, "CIF");
+                if (Send) EmailSend(list, "CIF");
 
                 return list;
             }

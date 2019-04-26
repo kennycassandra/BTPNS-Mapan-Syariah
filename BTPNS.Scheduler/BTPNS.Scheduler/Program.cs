@@ -16,7 +16,12 @@ namespace BTPNS.Scheduler
             {
                 string TestSendEmail = ConfigurationManager.AppSettings["TestSendEmail"].ToString();
                 string OutputFolder = AppDomain.CurrentDomain.BaseDirectory;
+                string SPSiteUrl = ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString();
+                string UserName = ConfigurationManager.AppSettings["UserName"].ToString();
+                string Password = ConfigurationManager.AppSettings["Password"].ToString();
                 Console.WriteLine("SMTP : {0}", ConfigurationManager.AppSettings["SMTP"].ToString());
+                Console.WriteLine("SPSitUrl : {0}", SPSiteUrl);
+                Console.WriteLine("UserName : {0}", UserName);
                 Console.WriteLine("From : {0}", ConfigurationManager.AppSettings["From"].ToString());
                 Console.WriteLine("Send To : {0}", ConfigurationManager.AppSettings["TestSendTo"].ToString());
                 Console.WriteLine("SQL Connection String : {0}", ConfigurationManager.ConnectionStrings["cnstr"].ToString());
@@ -31,11 +36,13 @@ namespace BTPNS.Scheduler
                     return;
                 }
 
-                new SharePointHelper().CreateDocLib2(OutputFolder, "AP3R", "IF Mapan Syariah Generate PDF");
-                new SharePointHelper().CreateDocLib2(OutputFolder, "CIF", "IF Mapan Syariah Generate PDF");
-                new SharePointHelper().CreateDocLib2(OutputFolder, "Pembiayaan", "IF Mapan Syariah Generate PDF");
-                new SharePointHelper().CreateDocLib2(OutputFolder, "Persetujuan_Pembiayaan", "IF Mapan Syariah Generate PDF");
-                new SharePointHelper().CreateDocLib2(OutputFolder, "SMS_Notification", "IF Mapan Syariah Generate PDF");
+                //Microsoft.SharePoint.Client.ClientContext cl = new SharePointHelper().Auth(OutputFolder, UserName, Password, SPSiteUrl);
+
+                //new SharePointHelper().CreateDocLib2(OutputFolder, "AP3R", "IF Mapan Syariah Generate PDF", cl);
+                //new SharePointHelper().CreateDocLib2(OutputFolder, "CIF", "IF Mapan Syariah Generate PDF", cl);
+                //new SharePointHelper().CreateDocLib2(OutputFolder, "Pembiayaan", "IF Mapan Syariah Generate PDF", cl);
+                //new SharePointHelper().CreateDocLib2(OutputFolder, "Persetujuan_Pembiayaan", "IF Mapan Syariah Generate PDF", cl);
+                //new SharePointHelper().CreateDocLib2(OutputFolder, "SMS_Notification", "IF Mapan Syariah Generate PDF", cl);
 
 
                 new SharePointHelper().CreateDocLib(OutputFolder, "AP3R", "IF Mapan Syariah Generate PDF");
@@ -44,10 +51,10 @@ namespace BTPNS.Scheduler
                 new SharePointHelper().CreateDocLib(OutputFolder, "Persetujuan_Pembiayaan", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "SMS_Notification", "IF Mapan Syariah Generate PDF");
 
-                new CleansingHelper().CleansingSPFiles(OutputFolder);
+                //new CleansingHelper().CleansingSPFiles(OutputFolder, cl);
                 new CleansingHelper().CleansingLocalFiles(OutputFolder);
 
-                new RDLCHelper().GeneratePDF(OutputFolder);
+                new RDLCHelper().GeneratePDF(OutputFolder, SPSiteUrl);
                 new RDLCHelper().GenerateSMS(OutputFolder);
                 new RDLCHelper().GenerateExcelSummaryReport_Detail1(OutputFolder);
                 new RDLCHelper().GenerateExcelSummaryReport_Detail2(OutputFolder);
