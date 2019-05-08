@@ -6,15 +6,39 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Configuration;
 using Microsoft.SharePoint.Client;
+using System.Data.SqlClient;
+
 namespace BTPNS.Scheduler
 {
     public class CleansingHelper
     {
+        DataBaseManager db = new DataBaseManager();
+        SqlConnection sqlConn = new SqlConnection();
+        SqlDataReader reader = null;
+        Utility util = new Utility();
+
         public static CamlQuery CreateAllFilesQuery()
         {
             var qry = new CamlQuery();
             qry.ViewXml = "<View Scope=\"RecursiveAll\"><Query><Where><Eq><FieldRef Name=\"FSObjType\" /><Value Type=\"Integer\">0</Value></Eq></Where></Query></View>";
             return qry;
+        }
+
+        public void CleansingLogExcelData(string OutputFolder)
+        {
+            try
+            {
+                db.OpenConnection(ref sqlConn);
+                db.cmd.CommandText = "usp_Cleansing";
+                db.cmd.ExecuteNonQuery();
+                db.CloseConnection(ref sqlConn);
+            }
+            catch (Exception ex)
+            {
+                db.CloseConnection(ref sqlConn);
+                new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "CleansingLogExcelData");
+
+            }
         }
         public void CleansingSPFiles(string OutputFolder, Microsoft.SharePoint.Client.ClientContext cl)
         {
@@ -108,6 +132,7 @@ namespace BTPNS.Scheduler
             {
                 int CleansingDays = GetCleansingDays();
 
+                string OutputFolderTXT = OutputFolder + @"Output\TXT";
                 string[] folders = Directory.GetDirectories(OutputFolder + "Output");
                 foreach (string fol in folders)
                 {
@@ -123,6 +148,24 @@ namespace BTPNS.Scheduler
                         }
                     }
                 }
+
+
+                folders = Directory.GetDirectories(OutputFolderTXT);
+                foreach (string fol in folders)
+                {
+                    string[] filePaths = Directory.GetFiles(fol);
+                    foreach (string f in filePaths)
+                    {
+                        DateTime dtModified = System.IO.File.GetLastWriteTime(f);
+                        DateTime dtCurrent = DateTime.Now;
+
+                        if ((dtCurrent - dtModified).TotalDays >= CleansingDays)
+                        {
+                            System.IO.File.Delete(f);
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {

@@ -120,7 +120,7 @@ namespace BTPNS.Scheduler
                             {
                                 Txt += "-" + util.GetStringValue(r, "CIF") + "-" + util.GetStringValue(r, "NomorAkad");
                                 Txt += "|" + util.GetStringValue(r, "LimitCurrency");
-                                Txt += "|"; // Proposal Date
+                                Txt += "|" + util.GetStringValue(r, "ProposalDate"); // Proposal Date
                                 Txt += "|" + util.GetStringValue(r, "PlafonRekomendasi");
                                 Txt += "|"; //Maximum Total
                                 Txt += "|" + util.GetStringValue(r, "RencanaCair");
@@ -143,7 +143,7 @@ namespace BTPNS.Scheduler
                                 //Txt += "|"; //+ util.GetStringValue(r, "Orientation"); //ORIENTATION
                                 Txt += "|"; //+ util.GetStringValue(r, "ProductChar"); //PRODUCT.CHAR
                                 Txt += "|"; //+ util.GetStringValue(r, "ClassOfCredit"); //CLASS.OF.CREDIT
-                                Txt += "|"; //+ util.GetStringValue(r, "ProjectLocate"); //PROJECT.LOCATE
+                                Txt += "|" + util.GetStringValue(r, "Dati2Anak"); //PROJECT.LOCATE (karena limit anak)
                                 Txt += "|"; //+ util.GetStringValue(r, "TypeOfUse"); // TYPE.OF.USE
                                 Txt += "|"; //+ util.GetStringValue(r, "KodeSektorEkonomi"); //ECONOMIC.SECTOR
                                 Txt += "|";// + util.GetStringValue(r, "LoansChar"); //LOANS.CHARC
@@ -404,9 +404,9 @@ namespace BTPNS.Scheduler
                             Txt += "|" + util.GetStringValue(rowDetail, "BMPKExceeding");
                             Txt += "|" + util.GetStringValue(rowDetail, "LBU_Cust_Type");
                             Txt += "|" + util.GetStringValue(rowDetail, "CustomerRating");
-                            Txt += "|" + util.GetStringValue(rowDetail, "CustomerSince");
                             Txt += "|"; //CU Rate Date
                             Txt += "|"; //LBBU Cust Type
+                            Txt += "|" + util.GetStringValue(rowDetail, "CustomerSince");
                             Txt += "|" + util.GetStringValue(rowDetail, "UploadCompany");
                             Txt += "|" + util.GetStringValue(rowDetail, "RESStatus");
                             Txt += "|" + util.GetStringValue(rowDetail, "RESYEAR") + "|" + util.GetStringValue(rowDetail, "RESMONTH");
@@ -422,7 +422,7 @@ namespace BTPNS.Scheduler
                             Txt += "|" + util.GetStringValue(rowDetail, "NomorRekening");
                             Txt += "|" + util.GetStringValue(rowDetail, "NamaPemilikRekening");
                             Txt += "|" + util.GetStringValue(rowDetail, "Fatca");
-                            Txt += "|" + util.GetStringValue(rowDetail, "TempatLahir");
+                            Txt += "|" + util.GetStringValue(rowDetail, "ProjectLocate");
                             Txt += "|" + util.GetStringValue(rowDetail, "AgentCode");
 
                             writer.WriteLine(Txt);

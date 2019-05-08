@@ -4131,7 +4131,7 @@
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
-                  <Format>'Rp' #,0.00;('Rp' #,0.00)</Format>
+                  <Format>#,0.00</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -4154,7 +4154,6 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
-          <rd:FormatSymbolCulture>id-ID</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Textbox Name="Textbox93">
@@ -4962,6 +4961,7 @@
           <Border>
             <Style>Solid</Style>
           </Border>
+          <BackgroundColor>=Switch(First(Fields!IsSameWithPrev.Value, "PP_DataSet") = "Y", "Orange")</BackgroundColor>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -5008,7 +5008,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
+                <Value EvaluationMode="Constant" />
                 <Style>
                   <FontFamily>calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -5028,6 +5028,7 @@
           <Border>
             <Style>Solid</Style>
           </Border>
+          <BackgroundColor>=Switch(First(Fields!IsSameWithPrev.Value, "PP_DataSet") = "N", "Orange")</BackgroundColor>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -5106,7 +5107,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
+                <Value>=First(Fields!PercentUp.Value, "PP_DataSet")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -5172,7 +5173,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
+                <Value>=First(Fields!PercentDown.Value, "PP_DataSet")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -6355,7 +6356,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -7102,6 +7102,18 @@
         <Field Name="AngsuranBulananAktifSaatIni">
           <DataField>AngsuranBulananAktifSaatIni</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IsSameWithPrev">
+          <DataField>IsSameWithPrev</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PercentUp">
+          <DataField>PercentUp</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PercentDown">
+          <DataField>PercentDown</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

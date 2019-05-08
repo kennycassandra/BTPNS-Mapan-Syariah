@@ -14,14 +14,15 @@ namespace BTPNS.Scheduler
         {
             try
             {
+
+
                 string TestSendEmail = ConfigurationManager.AppSettings["TestSendEmail"].ToString();
                 string OutputFolder = AppDomain.CurrentDomain.BaseDirectory;
+                string OutputFolderTXT = OutputFolder + @"Output\TXT";
+                Console.WriteLine(OutputFolderTXT);
                 string SPSiteUrl = ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString();
-                string UserName = ConfigurationManager.AppSettings["UserName"].ToString();
-                string Password = ConfigurationManager.AppSettings["Password"].ToString();
                 Console.WriteLine("SMTP : {0}", ConfigurationManager.AppSettings["SMTP"].ToString());
                 Console.WriteLine("SPSitUrl : {0}", SPSiteUrl);
-                Console.WriteLine("UserName : {0}", UserName);
                 Console.WriteLine("From : {0}", ConfigurationManager.AppSettings["From"].ToString());
                 Console.WriteLine("Send To : {0}", ConfigurationManager.AppSettings["TestSendTo"].ToString());
                 Console.WriteLine("SQL Connection String : {0}", ConfigurationManager.ConnectionStrings["cnstr"].ToString());
@@ -53,6 +54,14 @@ namespace BTPNS.Scheduler
 
                 //new CleansingHelper().CleansingSPFiles(OutputFolder, cl);
                 new CleansingHelper().CleansingLocalFiles(OutputFolder);
+                new CleansingHelper().CleansingLogExcelData(OutputFolder);
+
+                new SharePointHelper().CleansingFiles(OutputFolder, "AP3R");
+                new SharePointHelper().CleansingFiles(OutputFolder, "CIF");
+                new SharePointHelper().CleansingFiles(OutputFolder, "Pembiayaan");
+                new SharePointHelper().CleansingFiles(OutputFolder, "Persetujuan_Pembiayaan");
+                new SharePointHelper().CleansingFiles(OutputFolder, "SMS_Notification");
+
 
                 new RDLCHelper().GeneratePDF(OutputFolder, SPSiteUrl);
                 new RDLCHelper().GenerateSMS(OutputFolder);

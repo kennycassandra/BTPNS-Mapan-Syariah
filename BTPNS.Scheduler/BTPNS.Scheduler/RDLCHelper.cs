@@ -40,7 +40,7 @@ namespace BTPNS.Scheduler
                     string NomorAkad = util.GetStringValue(row, "NomorAkad");
                     string NomorDraft = util.GetStringValue(row, "NomorDraft");
                     string output1 = GenerateAP3RPDF(OutputFolder, "AP3R.rdlc", "AP3R_MapanSyariah_" + NomorAkad, NomorAkad);
-                    string output2 = GeneratePersetujuanPembiayaan(OutputFolder, "PersetujuanPembiayaan.rdlc", NomorAkad, "PP_MapanSyariah-" + NomorAkad);
+                    string output2 = GeneratePersetujuanPembiayaan(OutputFolder, "PersetujuanPembiayaan.rdlc", NomorAkad, "PP_MapanSyariah_" + NomorAkad);
                     string CIF = util.GetStringValue(row, "CIF");
                     string Url_AP3R = new SharePointHelper().UploadFileToDocLib(OutputFolder, output1, "AP3R");
                     string Url_PP = new SharePointHelper().UploadFileToDocLib(OutputFolder, output2, "Persetujuan_Pembiayaan");

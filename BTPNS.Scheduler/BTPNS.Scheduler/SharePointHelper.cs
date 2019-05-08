@@ -13,6 +13,7 @@ namespace BTPNS.Scheduler
 {
     public class SharePointHelper
     {
+        //https://social.msdn.microsoft.com/Forums/sharepoint/en-US/465c2a18-e63b-43b1-bed2-b1bf1934f0d1/need-to-get-actual-created-and-modified-time-of-the-document-while-uploading-file?forum=sharepointdevelopmentlegacy
         public ClientContext Auth(string OutputFolder, String uname, String pwd, string siteURL)
         {
             ClientContext context = new ClientContext(siteURL);
@@ -33,7 +34,7 @@ namespace BTPNS.Scheduler
                 return null;
             }
         }
-        public string UploadFileToDocLibClientSide(string OutputFolder, string SelectedfilePath, string DocLib , ClientContext context)
+        public string UploadFileToDocLibClientSide(string OutputFolder, string SelectedfilePath, string DocLib, ClientContext context)
         {
             try
             {
@@ -132,10 +133,40 @@ namespace BTPNS.Scheduler
             {
                 new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "CreateDocLib - " + DocLib);
             }
-          
+
         }
 
-        
+        public void CleansingFiles(string OutputFolder, string DocLib)
+        {
+            try
+            {
+                int CleansingDays = new CleansingHelper().GetCleansingDays();
+                SPSite Site = new SPSite(ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString());
+                SPSecurity.RunWithElevatedPrivileges(delegate ()
+                {
+                    using (SPWeb web = Site.OpenWeb())
+                    {
+                        web.AllowUnsafeUpdates = true;
+                        SPFolder libFolder = web.Folders[DocLib];
+                        SPFileCollection file = libFolder.Files;
+
+                        foreach (SPFile f in file)
+                        {
+                            SPListItem item = f.Item;
+                            int diff_days = (DateTime.Now - f.TimeCreated).Days;
+                            if (diff_days > CleansingDays) item.Delete();
+                        }
+                        web.AllowUnsafeUpdates = false;
+
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "CleansingFiles SharePoint - " + DocLib);
+            }
+
+        }
         public string UploadFileToDocLib(string OutputFolder, string SelectedfilePath, string DocLib)
         {
             try
@@ -164,7 +195,8 @@ namespace BTPNS.Scheduler
                                 url = fileOld.Url;
                                 fileOld.CheckOut();
                             }
-                            catch {
+                            catch
+                            {
                             }
                         }
 
@@ -191,6 +223,6 @@ namespace BTPNS.Scheduler
             }
 
         }
-        
+
     }
 }
