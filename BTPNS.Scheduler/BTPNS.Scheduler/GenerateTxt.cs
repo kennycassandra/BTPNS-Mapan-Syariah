@@ -253,7 +253,7 @@ namespace BTPNS.Scheduler
                     }
                     Console.WriteLine("Generate Txt Pembiayaan " + txt_file_name + " Done");
                 }
-                if(Send) EmailSend(list, "Pembiayaan");
+                if(Send) EmailSend(list, "Pembiayaan", OutputFolder);
                 return list;
             }
             catch (Exception ex)
@@ -450,7 +450,7 @@ namespace BTPNS.Scheduler
                     i++;
                 }
 
-                if (Send) EmailSend(list, "CIF");
+                if (Send) EmailSend(list, "CIF", OutputFolder);
 
                 return list;
             }
@@ -462,7 +462,7 @@ namespace BTPNS.Scheduler
             }
         }
 
-        public void EmailSend(List<EmailTxt> list, string GenerateType)
+        public void EmailSend(List<EmailTxt> list, string GenerateType, string OutputFolder)
         {
             int i = 0;
             string Email = "";
@@ -471,7 +471,7 @@ namespace BTPNS.Scheduler
             List<string> listAttach = new List<string>();
             listAttach.Add(list.FirstOrDefault().file_attachment);
             Email = list.FirstOrDefault().Email;
-            new MailHelper().email_send(listAttach, "Generate Txt " + GenerateType, Email, list.FirstOrDefault().BodyContent);
+            new MailHelper().email_send(listAttach, "Generate Txt " + GenerateType, Email, list.FirstOrDefault().BodyContent, OutputFolder);
 
             foreach (EmailTxt e in list)
             {

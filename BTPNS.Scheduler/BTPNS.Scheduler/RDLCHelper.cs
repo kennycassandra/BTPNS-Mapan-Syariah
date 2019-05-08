@@ -74,7 +74,7 @@ namespace BTPNS.Scheduler
 
                     new MailHelper().email_send(listAttach, 
                         "AP3R & Persetujuan Pembiayaan -" + CIF + "-" + NomorAkad, OfficerMail, 
-                        "AP3R - " + SPSite + Url_AP3R + Environment.NewLine + "Persetujuan Pembiayaan - " + SPSite + Url_PP);
+                        "AP3R - " + SPSite + Url_AP3R + Environment.NewLine + "Persetujuan Pembiayaan - " + SPSite + Url_PP, OutputFolder);
 
                     Console.WriteLine("Generate PDF AP3R & Form Persetujuan Pembiayaan Nomor Akad {0} Done", NomorAkad);
 
@@ -387,7 +387,7 @@ namespace BTPNS.Scheduler
                 {
                     List<string> list = new List<string>();
                     list.Add(file_output_url);
-                    new MailHelper().email_send(list, "Summary Status Mapan Syariah Report", OfficerEmail);
+                    new MailHelper().email_send(list, "Summary Status Mapan Syariah Report", OfficerEmail, "", OutputFolder);
                 }
                 #endregion
 
@@ -512,7 +512,7 @@ namespace BTPNS.Scheduler
                 {
                     List<string> list = new List<string>();
                     list.Add(file_output_url);
-                    new MailHelper().email_send(list, "Detail Status Mapan Syariah Report", OfficerEmail);
+                    new MailHelper().email_send(list, "Detail Status Mapan Syariah Report", OfficerEmail, "", OutputFolder);
                 }
                 #endregion
 
@@ -633,7 +633,7 @@ namespace BTPNS.Scheduler
                 {
                     List<string> list = new List<string>();
                     list.Add(file_output_url);
-                    new MailHelper().email_send(list, "Detail Summary Status Mapan Syariah Report", OfficerEmail);
+                    new MailHelper().email_send(list, "Detail Summary Status Mapan Syariah Report", OfficerEmail, "", OutputFolder);
                 }
                 #endregion
 

@@ -10,38 +10,46 @@ namespace BTPNS.Scheduler
 {
     public class MailHelper
     {
-        public void email_send(List<string> file_attachment, string Subject, string MailTo, string BodyContent="")
+        public void email_send(List<string> file_attachment, string Subject, string MailTo, string BodyContent="", string OutputFolder="")
         {
-            MailMessage mail = new MailMessage();
-
-            SmtpClient SmtpServer = new SmtpClient(ConfigurationManager.AppSettings["SMTP"].ToString());
-            mail.From = new MailAddress(ConfigurationManager.AppSettings["From"].ToString());
-            mail.To.Add(MailTo);
-            mail.Subject = Subject;
-            mail.Body = BodyContent;
-            mail.IsBodyHtml = true;
-
-            Attachment attachment;
-            foreach (string s in file_attachment)
+            try
             {
-                attachment = new System.Net.Mail.Attachment(s);
-                if (System.IO.File.Exists(s))
+                MailMessage mail = new MailMessage();
+                MailTo = new ActiveDirectoryHelper().GetEmailAD(MailTo);
+                SmtpClient SmtpServer = new SmtpClient(ConfigurationManager.AppSettings["SMTP"].ToString());
+                mail.From = new MailAddress(ConfigurationManager.AppSettings["From"].ToString());
+                mail.To.Add(MailTo);
+                mail.Subject = Subject;
+                mail.Body = BodyContent;
+                mail.IsBodyHtml = true;
+
+                Attachment attachment;
+                foreach (string s in file_attachment)
                 {
-                    mail.Attachments.Add(attachment);
+                    attachment = new System.Net.Mail.Attachment(s);
+                    if (System.IO.File.Exists(s))
+                    {
+                        mail.Attachments.Add(attachment);
+                    }
                 }
+                SmtpServer.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"].ToString());
+
+                string SMTPUser = ConfigurationManager.AppSettings["SMTPUser"].ToString();
+                string SMTPPass = ConfigurationManager.AppSettings["SMTPPass"].ToString();
+
+                if (!string.IsNullOrEmpty(SMTPUser))
+                {
+                    SmtpServer.Credentials = new System.Net.NetworkCredential(SMTPUser, SMTPPass);
+                }
+                SmtpServer.EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"].ToString());
+
+                SmtpServer.Send(mail);
+
             }
-            SmtpServer.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"].ToString());
-
-            string SMTPUser = ConfigurationManager.AppSettings["SMTPUser"].ToString();
-            string SMTPPass = ConfigurationManager.AppSettings["SMTPPass"].ToString();
-
-            if (!string.IsNullOrEmpty(SMTPUser))
+            catch (Exception ex)
             {
-                SmtpServer.Credentials = new System.Net.NetworkCredential(SMTPUser, SMTPPass);
+                new GenerateTxt().GenerateTxtLogError(OutputFolder, ex.Message, "Send Email to " + MailTo);
             }
-            SmtpServer.EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"].ToString());
-
-            SmtpServer.Send(mail);
 
         }
 

@@ -15,11 +15,12 @@ namespace BTPNS.Scheduler
             try
             {
 
-
                 string TestSendEmail = ConfigurationManager.AppSettings["TestSendEmail"].ToString();
                 string OutputFolder = AppDomain.CurrentDomain.BaseDirectory;
                 string OutputFolderTXT = OutputFolder + @"Output\TXT";
                 Console.WriteLine(OutputFolderTXT);
+                string LDAP = ConfigurationManager.AppSettings["LDAPPath"].ToString();
+
                 string SPSiteUrl = ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString();
                 Console.WriteLine("SMTP : {0}", ConfigurationManager.AppSettings["SMTP"].ToString());
                 Console.WriteLine("SPSitUrl : {0}", SPSiteUrl);
@@ -29,6 +30,7 @@ namespace BTPNS.Scheduler
                 //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
                 Console.WriteLine("Output Location : {0}", OutputFolder);
                 Console.WriteLine("Last Update : {0}", File.GetLastWriteTime(OutputFolder + "BTPNS.Scheduler.exe"));
+
                 if (TestSendEmail == "1")
                 {
                     new MailHelper().TestSendEmail();
@@ -71,7 +73,10 @@ namespace BTPNS.Scheduler
                 new RDLCHelper().GenerateExcelLogReport(OutputFolder);
                 new GenerateTxt().GenerateTxtCIF(OutputFolder);
                 new GenerateTxt().GenerateTxtPembiayaan(OutputFolder);
-                System.Threading.Thread.Sleep(5000);
+
+                new ActiveDirectoryHelper().GetADUsers(OutputFolder, LDAP);
+
+                System.Threading.Thread.Sleep(8000);
                 Console.WriteLine("Process Done");
             }
             catch (Exception ex)
