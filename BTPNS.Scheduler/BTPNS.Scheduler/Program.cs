@@ -19,7 +19,6 @@ namespace BTPNS.Scheduler
                 string OutputFolder = AppDomain.CurrentDomain.BaseDirectory;
                 string OutputFolderTXT = OutputFolder + @"Output\TXT";
                 Console.WriteLine(OutputFolderTXT);
-                string LDAP = ConfigurationManager.AppSettings["LDAPPath"].ToString();
 
                 string SPSiteUrl = ConfigurationManager.AppSettings["SharePointOnPremURL"].ToString();
                 Console.WriteLine("SMTP : {0}", ConfigurationManager.AppSettings["SMTP"].ToString());
@@ -71,10 +70,17 @@ namespace BTPNS.Scheduler
                 new RDLCHelper().GenerateExcelSummaryReport_Detail2(OutputFolder);
                 new RDLCHelper().GenerateExcelDetailReport(OutputFolder);
                 new RDLCHelper().GenerateExcelLogReport(OutputFolder);
-                new GenerateTxt().GenerateTxtCIF(OutputFolder);
-                new GenerateTxt().GenerateTxtPembiayaan(OutputFolder);
+                new GenerateTxt().GenerateTxtCIF(OutputFolder, SPSiteUrl);
+                new GenerateTxt().GenerateTxtPembiayaan(OutputFolder, SPSiteUrl);
 
-                new ActiveDirectoryHelper().GetADUsers(OutputFolder, LDAP);
+
+                //Proses Query Ldap Server setiap hari minggu
+                if (DateTime.Now.ToString("ddd").ToUpper()=="SUN")
+                {
+                    string LDAP = ConfigurationManager.AppSettings["LDAPPath"].ToString();
+                    new ActiveDirectoryHelper().GetADUsers(OutputFolder, LDAP);
+                    Console.WriteLine("LDAP Extraction Done");
+                }
 
                 System.Threading.Thread.Sleep(8000);
                 Console.WriteLine("Process Done");

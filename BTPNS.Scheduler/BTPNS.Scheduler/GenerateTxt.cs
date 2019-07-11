@@ -48,7 +48,7 @@ namespace BTPNS.Scheduler
             }
         }
 
-        public List<EmailTxt> GenerateTxtPembiayaan(string OutputFolder)
+        public List<EmailTxt> GenerateTxtPembiayaan(string OutputFolder,string SPSiteUrl)
         {
             DataTable dt = new DataTable();
             DataTable dtDetail = new DataTable();
@@ -230,7 +230,7 @@ namespace BTPNS.Scheduler
                                 Txt += "|";
                                 Txt += "|";
                                 Txt += "|" + util.GetStringValue(r, "InstDate");
-
+                                Txt += "|";
                                 writer.WriteLine(Txt);
 
                             }
@@ -247,7 +247,7 @@ namespace BTPNS.Scheduler
                         eml.Email = util.GetStringValue(row, "GeneratedBy");
                         eml.file_attachment = file_output_url;
                         eml.NomorDraft = NomorDraft;
-                        eml.BodyContent = txt_file_name + " - " + Url_Pembiayaan;
+                        eml.BodyContent = txt_file_name + " - " + SPSiteUrl + Url_Pembiayaan;
                         list.Add(eml);
                         Send = true;
                     }
@@ -264,7 +264,7 @@ namespace BTPNS.Scheduler
             }
         }
 
-        public List<EmailTxt> GenerateTxtCIF(string OutputFolder)
+        public List<EmailTxt> GenerateTxtCIF(string OutputFolder, string SPSiteUrl)
         {
             DataTable dt = new DataTable();
             DataTable dtDetail = new DataTable();
@@ -441,7 +441,7 @@ namespace BTPNS.Scheduler
                         eml.Email = util.GetStringValue(row, "GeneratedBy");
                         eml.file_attachment = file_output_url;
                         eml.NomorDraft = NomorDraft;
-                        eml.BodyContent = txt_file_name + " - " + Url_CIF;
+                        eml.BodyContent = txt_file_name + " - " + SPSiteUrl + Url_CIF;
                         list.Add(eml);
                         Send = true;
                         Console.WriteLine("Generate Txt CIF " + txt_file_name + " Done");

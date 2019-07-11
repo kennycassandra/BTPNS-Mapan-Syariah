@@ -31,7 +31,7 @@ namespace BTPNS.Scheduler
             {
                 return (string)sr.Properties[attrName][0];
             }
-            catch 
+            catch
             {
                 return "";
             }
@@ -42,9 +42,9 @@ namespace BTPNS.Scheduler
             string email = "";
             try
             {
+                MailAddress = MailAddress.Split('@')[0];
                 db.OpenConnection(ref sqlConn);
-                email = db.GetValueFromQuery("select * from officer_AD where employeeId = '" + 
-                    MailAddress.Replace("@mail.btpnsyariah.com","") + "'", "Mail");
+                email = db.GetValueFromQuery("select * from officer_AD where employeeId = '" + MailAddress + "'", "Mail");
                 db.CloseConnection(ref sqlConn);
                 return email;
             }
@@ -60,48 +60,54 @@ namespace BTPNS.Scheduler
             try
             {
                 List<User> AdUsers = new List<User>();
-                string domainPath = LDAPPath;
-                DirectoryEntry searchroot = new DirectoryEntry(domainPath);
-                DirectorySearcher search = new DirectorySearcher(searchroot);
-                search.Filter = "(&(objectClass=user)(objectCategory=person))";
-                search.PropertiesToLoad.Add("samaccountname");
-                search.PropertiesToLoad.Add("displayname");
-                search.PropertiesToLoad.Add("employeeID");
-                search.PropertiesToLoad.Add("mail");
-                SearchResult result;
-                SearchResultCollection resultCol = search.FindAll();
-                if (resultCol != null)
+
+                foreach (string domainPath in LDAPPath.Split(';'))
                 {
-                    db.OpenConnection(ref sqlConn, true);
-                    for (int i = 0; i < resultCol.Count; i++)
+                    if (!string.IsNullOrEmpty(domainPath))
                     {
-                        result = resultCol[i];
-                        User adUser = new User();
-                        adUser.DisplayName = getAttributeValue(result, "displayname");
-                        adUser.UserName = getAttributeValue(result, "samaccountname");
-                        adUser.Mail = getAttributeValue(result, "mail");
-                        adUser.EmployeeId = getAttributeValue(result, "employeeID");
-                        AdUsers.Add(adUser);
-
-                        if(!string.IsNullOrEmpty(adUser.EmployeeId))
+                        DirectoryEntry searchroot = new DirectoryEntry(domainPath);
+                        DirectorySearcher search = new DirectorySearcher(searchroot);
+                        search.Filter = "(&(objectClass=user)(objectCategory=person))";
+                        search.PropertiesToLoad.Add("samaccountname");
+                        search.PropertiesToLoad.Add("displayname");
+                        search.PropertiesToLoad.Add("employeeID");
+                        search.PropertiesToLoad.Add("mail");
+                        SearchResult result;
+                        SearchResultCollection resultCol = search.FindAll();
+                        if (resultCol != null)
                         {
-                            //@EmployeeId varchar(50),
-                            //@DisplayName varchar(100),
-                            //@AccountUserName varchar(255),
-                            //@Mail varchar(255)                            
-                            db.cmd.CommandText = "usp_Officer_AD_Insert";
-                            db.cmd.CommandType = CommandType.StoredProcedure;
-                            db.cmd.Parameters.Clear();
-                            db.AddInParameter(db.cmd, "EmployeeId", adUser.EmployeeId);
-                            db.AddInParameter(db.cmd, "DisplayName", adUser.DisplayName);
-                            db.AddInParameter(db.cmd, "AccountUserName", adUser.UserName);
-                            db.AddInParameter(db.cmd, "Mail", adUser.Mail);
+                            db.OpenConnection(ref sqlConn, true);
+                            for (int i = 0; i < resultCol.Count; i++)
+                            {
+                                result = resultCol[i];
+                                User adUser = new User();
+                                adUser.DisplayName = getAttributeValue(result, "cn");
+                                adUser.UserName = getAttributeValue(result, "samaccountname");
+                                adUser.Mail = getAttributeValue(result, "mail");
+                                adUser.EmployeeId = getAttributeValue(result, "samaccountname");
+                                AdUsers.Add(adUser);
 
-                            db.cmd.ExecuteNonQuery();
+                                if (!string.IsNullOrEmpty(adUser.EmployeeId))
+                                {
+                                    //@EmployeeId varchar(50),
+                                    //@DisplayName varchar(100),
+                                    //@AccountUserName varchar(255),
+                                    //@Mail varchar(255)                            
+                                    db.cmd.CommandText = "usp_Officer_AD_Insert";
+                                    db.cmd.CommandType = CommandType.StoredProcedure;
+                                    db.cmd.Parameters.Clear();
+                                    db.AddInParameter(db.cmd, "EmployeeId", adUser.EmployeeId);
+                                    db.AddInParameter(db.cmd, "DisplayName", adUser.DisplayName);
+                                    db.AddInParameter(db.cmd, "AccountUserName", adUser.UserName);
+                                    db.AddInParameter(db.cmd, "Mail", adUser.Mail);
+
+                                    db.cmd.ExecuteNonQuery();
+                                }
+
+                            }
+                            db.CloseConnection(ref sqlConn, true);
                         }
-
                     }
-                    db.CloseConnection(ref sqlConn, true);
                 }
             }
             catch (Exception ex)
@@ -140,7 +146,7 @@ namespace BTPNS.Scheduler
 
                 string _filterAttribute = (String)result.Properties["cn"][0];
 
-                foreach(SearchResult rs in search.FindAll())
+                foreach (SearchResult rs in search.FindAll())
                 {
                     Console.WriteLine((String)rs.Properties["cn"][0] + " - " + (String)rs.Properties["mail"][0] + (String)rs.Properties["employeeid"][0]);
                 }
@@ -160,7 +166,7 @@ namespace BTPNS.Scheduler
         public void GetActiveDirectoryList()
         {
             // bind to your domain
-           PrincipalContext pricipalContext = new PrincipalContext(ContextType.Domain, "demodomain", "DC=demodomain,DC=com, OU=users");
+            PrincipalContext pricipalContext = new PrincipalContext(ContextType.Domain, "demodomain", "DC=demodomain,DC=com, OU=users");
 
             // find the user by identity (or many other ways)
             //UserPrincipal user = UserPrincipal.FindByIdentity(pricipalContext, "cn=leonard");
