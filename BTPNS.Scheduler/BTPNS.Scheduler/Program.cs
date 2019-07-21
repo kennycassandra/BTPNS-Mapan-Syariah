@@ -46,12 +46,14 @@ namespace BTPNS.Scheduler
                 //new SharePointHelper().CreateDocLib2(OutputFolder, "Persetujuan_Pembiayaan", "IF Mapan Syariah Generate PDF", cl);
                 //new SharePointHelper().CreateDocLib2(OutputFolder, "SMS_Notification", "IF Mapan Syariah Generate PDF", cl);
 
-
+                /*
+                 * //Karena sudah ter-create, tidak perlu pake function ini lagi.
                 new SharePointHelper().CreateDocLib(OutputFolder, "AP3R", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "CIF", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "Pembiayaan", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "Persetujuan_Pembiayaan", "IF Mapan Syariah Generate PDF");
                 new SharePointHelper().CreateDocLib(OutputFolder, "SMS_Notification", "IF Mapan Syariah Generate PDF");
+                */
 
                 //new CleansingHelper().CleansingSPFiles(OutputFolder, cl);
                 new CleansingHelper().CleansingLocalFiles(OutputFolder);
